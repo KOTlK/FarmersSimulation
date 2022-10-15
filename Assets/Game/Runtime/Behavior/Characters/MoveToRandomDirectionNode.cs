@@ -13,7 +13,7 @@ namespace Game.Runtime.Behavior.Characters
         public MoveToRandomDirectionNode(IMovement origin)
         {
             _origin = origin;
-            _direction = Random.insideUnitCircle.normalized;
+            _direction = UnityEngine.Random.insideUnitCircle.normalized;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
@@ -25,7 +25,7 @@ namespace Game.Runtime.Behavior.Characters
         public override void Reset()
         {
             base.Reset();
-            _direction = Random.insideUnitCircle.normalized;
+            _direction = UnityEngine.Random.insideUnitCircle.normalized;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Runtime.Random;
 using Game.Runtime.View.Characters;
 using UnityEngine;
 
@@ -13,6 +14,11 @@ namespace Game.Runtime.Characters
 
         private Rigidbody2D _rigidbody;
 
+        public void Initialize(IRandomGenerator<string> randomName, IRandomGenerator<float> randomAge)
+        {
+            _name = randomName.Next();
+            _age = randomAge.Next();
+        }
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -31,19 +37,11 @@ namespace Game.Runtime.Characters
             _rigidbody.MovePosition(_rigidbody.position + deltaMovement);
         }
 
-        public void Visualize(INameView nameView)
+        public void Visualize(ICharacterView view)
         {
-            nameView.DisplayName(_name);
-        }
-
-        public void Visualize(IAgeView ageView)
-        {
-            ageView.DisplayAge(_age);
-        }
-
-        public void Visualize(IProfessionView professionView)
-        {
-            professionView.DisplayProfession(Profession);
+            view.DisplayAge(_age);
+            view.DisplayName(_name);
+            view.DisplayProfession(Profession);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Game.Runtime.View
 
         public void Next()
         {
-            Position = _character.Position + Random.insideUnitCircle * _distance;
+            Position = _character.Position + UnityEngine.Random.insideUnitCircle * _distance;
         }
     }
 }

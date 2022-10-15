@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7499839789513574208}
   - component: {fileID: 7499839789513574211}
   - component: {fileID: 7499839789513574210}
+  - component: {fileID: 2625837177597697664}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Untagged
@@ -150,3 +151,16 @@ MonoBehaviour:
   _age: 18
   _speed: 5
   _party: 0
+--- !u!114 &2625837177597697664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7499839789513578685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982e53292e5849dbb0dbc7dca98b15ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 7499839789513574210}

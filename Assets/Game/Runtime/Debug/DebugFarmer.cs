@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Runtime.Characters.Professions.Farmer;
+﻿using Game.Runtime.Characters.Professions.Farmer;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Inventory;
 using Game.Runtime.View.Storage;
@@ -17,13 +16,13 @@ namespace Game.Runtime.Debugging
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {
                 _farmer.GatherPlant(_plant);
                 _farmer.Visualize(_storageView);
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
             {
                 _farmer.EmptyPockets(_worldStorage);
                 _farmer.Visualize(_storageView);

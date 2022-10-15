@@ -9,20 +9,15 @@ namespace Game.Runtime.Inventory
     {
         private readonly Dictionary<Type, Stack<IItem>> _items = new();
         private readonly int _maxCapacity;
+        
+        private int _capacity = 0;
 
         public Storage(int maxCapacity)
         {
             _maxCapacity = maxCapacity;
         }
 
-        public bool IsFull
-        {
-            get
-            {
-                var count = _items.Sum(item => item.Value.Count);
-                return count >= _maxCapacity;
-            }
-        }
+        public bool IsFull => _capacity == _maxCapacity;
 
         public bool HasItem<TItem>() => _items.ContainsKey(typeof(TItem));
 
@@ -42,6 +37,8 @@ namespace Game.Runtime.Inventory
                 _items.Add(key, new Stack<IItem>());
                 _items[key].Push(item);
             }
+
+            _capacity++;
         }
 
         public TItem Take<TItem>()
@@ -55,14 +52,13 @@ namespace Game.Runtime.Inventory
             if (_items[key].Count == 0)
                 _items.Remove(key);
 
+            _capacity--;
             return (TItem)item;
         }
 
         public void Visualize(IStorageView view)
         {
-            IEnumerable<IItem> items = new List<IItem>();
-
-            items = _items.Aggregate(items, (current, item) => current.Concat(item.Value));
+            var items = _items.Select(item => (item.Value.Last(), item.Value.Count));
 
             view.DisplayStorage(items);
         }
