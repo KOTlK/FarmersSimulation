@@ -1,6 +1,6 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters.Professions.Farmer;
-using Game.Runtime.Inventory;
+using Game.Runtime.Resources;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Farmer
 {

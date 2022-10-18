@@ -6,12 +6,12 @@ namespace Game.Runtime.Environment.Crops
 {
     public class GrownWheat : IGrownPlants
     {
-        private readonly Stack<Plant<WheatPlant>> _readyForGather = new();
-        private readonly List<Plant<WheatPlant>> _notReady;
+        private readonly Stack<Plant> _readyForGather = new();
+        private readonly List<Plant> _notReady;
 
-        public GrownWheat(IEnumerable<Plant<WheatPlant>> plants)
+        public GrownWheat(IEnumerable<Plant> plants)
         {
-            _notReady = new List<Plant<WheatPlant>>(plants);
+            _notReady = new List<Plant>(plants);
             foreach (var plant in plants)
             {
                 plant.Grown += _readyForGather.Push;

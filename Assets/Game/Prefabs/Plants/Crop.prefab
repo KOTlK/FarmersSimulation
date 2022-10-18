@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5269358977008033813}
   - component: {fileID: 5269358977008033810}
-  - component: {fileID: 5269358977008033811}
+  - component: {fileID: 6876292118211087009}
   m_Layer: 0
   m_Name: Crop
   m_TagString: Untagged
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5269358977008033811
+--- !u!114 &6876292118211087009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,9 +95,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5269358977008033808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ae0a24a24f64e88ba288110376496cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e69d9eb1706477296892acfca838a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetResource: 0
   _growsTime: 5
   _grownSprite: {fileID: 21300000, guid: f30c7d39dce913648a486285a1095dab, type: 3}
   _undergrownSprite: {fileID: 21300000, guid: ec75f923e04edda459ea2db07bbfee75, type: 3}

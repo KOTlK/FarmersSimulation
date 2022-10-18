@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
-using Game.Runtime.Inventory;
+using Game.Runtime.Resources;
 using UnityEngine;
 
 namespace Game.Runtime.Environment.Crops.MonoBehaviours
 {
-    public abstract class Plant<TItem> : MonoBehaviour, IPlant
-    where TItem : IItem, new()
+    public class Plant : MonoBehaviour, IPlant
     {
-        public event Action<Plant<TItem>> Grown;
-        
+        public event Action<Plant> Grown;
+
+        [SerializeField] private Resource _targetResource = Resource.Wheat;
         [SerializeField] private float _growsTime = 5f;
         [SerializeField] private Sprite _grownSprite = null;
         [SerializeField] private Sprite _undergrownSprite = null;
@@ -27,12 +27,12 @@ namespace Game.Runtime.Environment.Crops.MonoBehaviours
 
         public Vector2 Position => transform.position;
         
-        public void Gather(IStorage storage)
+        public void Gather(IResourcesStorage storage)
         {
             if (ReadyForGather == false)
                 throw new Exception("Plant is not ready for gather");
             
-            storage.Put<TItem>(new TItem());
+            storage.Put(_targetResource);
             StartCoroutine(Growing(_growsTime));
         }
 

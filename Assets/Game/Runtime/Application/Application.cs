@@ -10,12 +10,11 @@ using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Input;
 using Game.Runtime.Input.Characters;
-using Game.Runtime.Inventory;
 using Game.Runtime.Random;
 using Game.Runtime.Rendering;
+using Game.Runtime.Resources;
 using Game.Runtime.View.Characters;
 using UnityEngine;
-using WheatPlant = Game.Runtime.Environment.Crops.WheatPlant;
 
 namespace Game.Runtime.Application
 {
@@ -39,7 +38,7 @@ namespace Game.Runtime.Application
 
         private void Start()
         {
-            var plants = FindObjectsOfType<Plant<WheatPlant>>();
+            var plants = FindObjectsOfType<Plant>();
             var characters = FindObjectsOfType<Character>();
             var inputs = characters.Select(character => character.GetComponent<IClickInput<ICharacter>>());
             

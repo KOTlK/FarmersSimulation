@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Game.Runtime.Inventory;
+using Game.Runtime.Resources;
 using UnityEngine;
 
 namespace Game.Runtime.View.Storage
 {
-    public class StorageView : MonoBehaviour, IStorageView
+    public class ResourceStorageView : MonoBehaviour, IResourceStorageView
     {
-        [SerializeField] private ItemsFactory _itemsFactory = null;
+        [SerializeField] private ResourceViewFactory _itemsFactory = null;
         [SerializeField] private Transform _content = null;
 
-        private readonly Dictionary<IItem, ItemView> _spawned = new();
+        private readonly Dictionary<Resource, ResourceView> _spawned = new();
         
-        public void DisplayStorage(IEnumerable<(IItem, int)> items)
+        public void DisplayStorage(Dictionary<Resource, int> items)
         {
             foreach (var (item, count) in items)
             {
@@ -28,16 +27,6 @@ namespace Game.Runtime.View.Storage
                 _spawned.Add(item, spawnedItem);
             }
 
-        }
-
-        private void Clear()
-        {
-            foreach (var item in _spawned)
-            {
-                item.Value.Destroy();
-            }
-
-            _spawned.Clear();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.Runtime.Environment.Crops;
-using Game.Runtime.Inventory;
+using Game.Runtime.Resources;
 using Game.Runtime.View.Storage;
 using UnityEngine;
 
@@ -10,14 +10,14 @@ namespace Game.Runtime.Characters.Professions.Farmer
     {
         [SerializeField] private Party _party;
 
-        private readonly IStorage _inventory = new Storage(15);
+        private readonly IResourcesStorage _inventory = new ResourceStorage(15);
 
         public override Party Party => _party;
         public override Profession Profession => Profession.Farmer;
-        public bool HasCollectedPlants => _inventory.HasItem<WheatPlant>();
+        public bool HasCollectedPlants => _inventory.HasResource(Resource.Wheat);
         public bool InventoryFull => _inventory.IsFull;
         
-        public void Visualize(IStorageView view)
+        public void Visualize(IResourceStorageView view)
         {
             _inventory.Visualize(view);
         }
@@ -27,15 +27,18 @@ namespace Game.Runtime.Characters.Professions.Farmer
             plant.Gather(_inventory);
         }
 
-        public void EmptyPockets(IStorage targetStorage)
+        public void EmptyPockets(IResourcesStorage targetStorage)
         {
-            if (_inventory.HasItem<WheatPlant>() == false)
+            if (_inventory.HasResource(Resource.Wheat) == false)
                 throw new Exception("Storage has no available item");
 
-            while (_inventory.HasItem<WheatPlant>())
-            {
-                targetStorage.Put<WheatPlant>(_inventory.Take<WheatPlant>());
-            }
+            var count = _inventory.Count(Resource.Wheat);
+
+            if (targetStorage.EnoughSpace(count) == false)
+                throw new Exception($"Not enough space in {nameof(targetStorage)}");
+            
+            _inventory.Remove(Resource.Wheat, count);
+            targetStorage.Put(Resource.Wheat, count);
         }
     }
 }

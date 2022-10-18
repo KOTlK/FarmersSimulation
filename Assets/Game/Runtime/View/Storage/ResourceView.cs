@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Runtime.View.Storage
 {
-    public class ItemView : MonoBehaviour
+    public class ResourceView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _count = null;
         
