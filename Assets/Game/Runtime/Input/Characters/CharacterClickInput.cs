@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Runtime.Characters;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Runtime.Input.Characters
 {
@@ -12,6 +13,9 @@ namespace Game.Runtime.Input.Characters
 
         private void OnMouseDown()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            
             Clicked.Invoke(_character);
         }
     }

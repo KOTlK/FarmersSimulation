@@ -39,7 +39,7 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
             }).Repeat();
         }
 
-        public void ExecuteBehavior(long time)
+        public void Execute(long time)
         {
             _behavior.Execute(time);
         }

@@ -4,7 +4,7 @@ using Game.Runtime.View.Characters;
 
 namespace Game.Runtime.Characters
 {
-    public interface ICharacter : IMovement, IVisualization<ICharacterView>, ISceneObject
+    public interface ICharacter : IMovement, IVisualization<ICharacterView>, ISceneObject, IBehavior
     {
     }
 }

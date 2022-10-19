@@ -10,10 +10,11 @@ using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Input;
 using Game.Runtime.Input.Characters;
+using Game.Runtime.Input.View;
 using Game.Runtime.Random;
 using Game.Runtime.Rendering;
 using Game.Runtime.Resources;
-using Game.Runtime.View.Characters;
+using Game.Runtime.Session;
 using UnityEngine;
 
 namespace Game.Runtime.Application
@@ -24,7 +25,9 @@ namespace Game.Runtime.Application
         [SerializeField] private Transform _debugUIParent;
         [SerializeField] private TreeVisualization _debugGraph;
         [SerializeField] private WorldStorage _storage;
-        [SerializeField] private CharacterView _characterView;
+        [SerializeField] private TreeVisualization _debugSession;
+
+        [SerializeField] private UIRoot _uiRoot = null;
 
         [SerializeField] private bool _visualizeBehaviors = false;
 
@@ -36,6 +39,8 @@ namespace Game.Runtime.Application
 
         private readonly Dictionary<ICharacter, IBehavior> _characterBehaviors = new();
 
+        private ISession _session;
+
         private void Start()
         {
             var plants = FindObjectsOfType<Plant>();
@@ -44,11 +49,6 @@ namespace Game.Runtime.Application
             
             var randomName = new RandomName(_names.text);
             var randomAge = new RandomAge(18f, 65f);
-
-            foreach (var character in characters)
-            {
-                character.Initialize(randomName, randomAge);
-            }
 
             _characterInputs = new CharacterInputs(inputs.ToArray());
             _grownPlants = new GrownWheat(plants);
@@ -66,6 +66,8 @@ namespace Game.Runtime.Application
                     Profession.Warrior => throw new NotImplementedException(),
                     _ => throw new NotImplementedException()
                 };
+
+                character.Initialize(randomName, randomAge, _behaviors[i]);
 
                 _characterBehaviors.Add(character, _behaviors[i]);
             }
@@ -87,6 +89,14 @@ namespace Game.Runtime.Application
             }
 
             _treesRenderer = new RenderChain(renderers);
+
+            _session = new Session.Session(
+                _uiRoot,
+                _characterInputs,
+                new ClickedCharacter(
+                    new CharacterBehaviors(
+                        characters,
+                        _behaviors)));
         }
 
         private void FixedUpdate()
@@ -95,28 +105,23 @@ namespace Game.Runtime.Application
 
             foreach (var behavior in _behaviors)
             {
-                behavior.ExecuteBehavior(time);
+                behavior.Execute(time);
             }
 
-            if (_visualizeBehaviors == false)
-                return;
+            if (_visualizeBehaviors)
+                _treesRenderer.Render();
             
-            _treesRenderer.Render();
+
+            
         }
 
-        private ICharacter _clickedCharacter;
         private void Update()
         {
-            if (_characterInputs.HasUnreadInput)
-            {
-                _clickedCharacter = _characterInputs.GetInput();
-                _clickedCharacter.Visualize(_characterView);
-            }
-
-            if (_clickedCharacter == null) 
-                return;
+            var time = (long) (Time.realtimeSinceStartupAsDouble * 1000);
             
-            _characterView.DisplayBehavior(_characterBehaviors[_clickedCharacter]);
+            _session.Execute(time);
+            _session.Visualize(_debugSession);
+            _debugSession.Visualize();
         }
     }
 }

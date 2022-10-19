@@ -26,7 +26,7 @@ namespace Game.Runtime.Behavior.Characters.Professions
             ).Repeat();
         }
 
-        public void ExecuteBehavior(long time)
+        public void Execute(long time)
         {
             _behavior.Execute(time);
         }
