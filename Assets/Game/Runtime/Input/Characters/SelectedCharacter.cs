@@ -1,21 +1,13 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Behavior.Characters.Professions;
 using Game.Runtime.Characters;
 using Game.Runtime.View.Characters;
 using UnityEngine;
 
 namespace Game.Runtime.Input.Characters
 {
-    public class ClickedCharacter : IClickedCharacter
+    public class SelectedCharacter : ISelectedCharacter
     {
         private ICharacter _character = new EmptyCharacter();
-
-        private readonly ICharacterBehaviors _behaviors;
-
-        public ClickedCharacter(ICharacterBehaviors behaviors)
-        {
-            _behaviors = behaviors;
-        }
 
         public bool Exist => _character != null;
         public void Move(Vector2 direction) => _character.Move(direction);
@@ -34,8 +26,10 @@ namespace Game.Runtime.Input.Characters
             _character = null;
         }
 
-        public void Visualize(ITreeGraph<IReadOnlyBehaviorNode> view) => _behaviors.GetBehavior(this).Visualize(view);
+        public void Visualize(ITreeGraph<IReadOnlyBehaviorNode> view) => _character.Visualize(view);
 
-        public void Execute(long time) => _behaviors.GetBehavior(this).Execute(time);
+        public void Execute(long time) => _character.Execute(time);
+        public Party Party => _character.Party;
+        public Profession Profession => _character.Profession;
     }
 }

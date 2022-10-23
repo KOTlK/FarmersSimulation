@@ -1,6 +1,6 @@
-﻿namespace Game.Runtime.Input.Characters
+﻿namespace Game.Runtime.Input
 {
-    public interface IClickInputs<out T>
+    public interface IClickQueue<out T>
     {
         bool HasUnreadInput { get; }
         T GetInput();

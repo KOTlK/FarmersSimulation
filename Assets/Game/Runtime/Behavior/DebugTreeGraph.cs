@@ -65,7 +65,7 @@ namespace Game.Runtime.Behavior
             {
                 _stringBuilder.Append('\n');
                 _stringBuilder.Append(_indentation);
-                _stringBuilder.Append(CurrentChildrenToDrawCount > 1 ? "├╴" : "└╴");
+                _stringBuilder.Append(CurrentChildrenToDrawCount > 1 ? "" : "");
             }
 
             _stringBuilder.Append($"{behaviorNode.Name} {_statusToString[behaviorNode.Status]}");

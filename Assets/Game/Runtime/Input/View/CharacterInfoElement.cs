@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Input.View
 {
-    public class CharacterInfoPanel : MonoBehaviour, ICharacterInfoPanel
+    public class CharacterInfoElement : MonoBehaviour, ICharacterInfoElement
     {
         [SerializeField] private Button _closeButton = null;
         [SerializeField] private CharacterView _characterView = null;

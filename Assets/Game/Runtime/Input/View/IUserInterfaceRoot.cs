@@ -1,7 +1,10 @@
-﻿namespace Game.Runtime.Input.View
+﻿using Game.Runtime.View.Storage;
+
+namespace Game.Runtime.Input.View
 {
     public interface IUserInterfaceRoot
     {
-        ICharacterInfoPanel CharacterInfoPanel { get; }
+        ICharacterInfoElement CharacterInfoElement { get; }
+        ResourceStorageView StorageElement { get; }
     }
 }

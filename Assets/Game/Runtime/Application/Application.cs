@@ -15,6 +15,7 @@ using Game.Runtime.Random;
 using Game.Runtime.Rendering;
 using Game.Runtime.Resources;
 using Game.Runtime.Session;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Runtime.Application
@@ -26,19 +27,10 @@ namespace Game.Runtime.Application
         [SerializeField] private TreeVisualization _debugGraph;
         [SerializeField] private WorldStorage _storage;
         [SerializeField] private TreeVisualization _debugSession;
-
         [SerializeField] private UIRoot _uiRoot = null;
-
         [SerializeField] private bool _visualizeBehaviors = false;
 
-        private IBehavior[] _behaviors;
-        private IGrownPlants _grownPlants;
-
         private IRenderer _treesRenderer;
-        private IClickInputs<ICharacter> _characterInputs;
-
-        private readonly Dictionary<ICharacter, IBehavior> _characterBehaviors = new();
-
         private ISession _session;
 
         private void Start()
@@ -46,44 +38,33 @@ namespace Game.Runtime.Application
             var plants = FindObjectsOfType<Plant>();
             var characters = FindObjectsOfType<Character>();
             var inputs = characters.Select(character => character.GetComponent<IClickInput<ICharacter>>());
-            
-            var randomName = new RandomName(_names.text);
-            var randomAge = new RandomAge(18f, 65f);
-
-            _characterInputs = new CharacterInputs(inputs.ToArray());
-            _grownPlants = new GrownWheat(plants);
-            _behaviors = new IBehavior[characters.Length];
-
-            for (var i = 0; i < _behaviors.Length; i++)
+            var storageInput = new IClickInput<IWorldStorage>[1]
             {
-                var character = characters[i];
+                _storage.GetComponent<IClickInput<IWorldStorage>>()
+            };
 
-                _behaviors[i] = character.Profession switch
-                {
-                    Profession.Civilian => new Civilian(character),
-                    Profession.Farmer => new FarmerBehavior((IFarmer)character, _grownPlants, _storage),
-                    Profession.Miner => throw new NotImplementedException(),
-                    Profession.Warrior => throw new NotImplementedException(),
-                    _ => throw new NotImplementedException()
-                };
-
-                character.Initialize(randomName, randomAge, _behaviors[i]);
-
-                _characterBehaviors.Add(character, _behaviors[i]);
-            }
+            var sceneData = new SceneData
+            {
+                Characters = characters,
+                CharacterInputs = new ClickQueue<ICharacter>(inputs.ToArray()),
+                Names = _names,
+                Plants = new GrownWheat(plants),
+                Storage = _storage,
+                StorageInputs = new ClickQueue<IWorldStorage>(storageInput)
+            };
             
             //Debug render for behavior trees
-            var renderers = new DebugTreeRenderer[_behaviors.Length];
+            var renderers = new DebugTreeRenderer[sceneData.Characters.Length];
             var position = Vector2.zero;
 
-            for (var i = 0; i < _behaviors.Length; i++)
+            for (var i = 0; i < sceneData.Characters.Length; i++)
             {
                 var spawned = Instantiate(_debugGraph, _debugUIParent);
                 spawned.transform.position = position;
                 position += new Vector2(300, 0);
                 
                 renderers[i] = new DebugTreeRenderer(
-                    _behaviors[i], 
+                    sceneData.Characters[i], 
                     spawned
                 );
             }
@@ -92,36 +73,20 @@ namespace Game.Runtime.Application
 
             _session = new Session.Session(
                 _uiRoot,
-                _characterInputs,
-                new ClickedCharacter(
-                    new CharacterBehaviors(
-                        characters,
-                        _behaviors)));
+                sceneData);
         }
 
         private void FixedUpdate()
         {
             var time = (long) (Time.realtimeSinceStartupAsDouble * 1000);
 
-            foreach (var behavior in _behaviors)
-            {
-                behavior.Execute(time);
-            }
+            _session.Execute(time);
+            _session.Visualize(_debugSession);
+            _debugSession.Visualize();
 
             if (_visualizeBehaviors)
                 _treesRenderer.Render();
             
-
-            
-        }
-
-        private void Update()
-        {
-            var time = (long) (Time.realtimeSinceStartupAsDouble * 1000);
-            
-            _session.Execute(time);
-            _session.Visualize(_debugSession);
-            _debugSession.Visualize();
         }
     }
 }

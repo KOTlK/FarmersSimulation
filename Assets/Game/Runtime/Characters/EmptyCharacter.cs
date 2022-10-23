@@ -25,5 +25,8 @@ namespace Game.Runtime.Characters
         public void Execute(long time)
         {
         }
+
+        public Party Party => Party.Red;
+        public Profession Profession => Profession.Civilian;
     }
 }

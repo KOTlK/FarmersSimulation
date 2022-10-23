@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Game.Runtime.Characters;
 
-namespace Game.Runtime.Input.Characters
+namespace Game.Runtime.Input
 {
-    public class CharacterInputs : IClickInputs<ICharacter>
+    public class ClickQueue<T> : IClickQueue<T>
     {
-        private readonly Queue<ICharacter> _clickedCharacters = new();
+        private readonly Queue<T> _clickedCharacters = new();
 
-        public CharacterInputs(IClickInput<ICharacter>[] inputs)
+        public ClickQueue(IClickInput<T>[] inputs)
         {
             foreach (var input in inputs)
             {
@@ -17,7 +16,7 @@ namespace Game.Runtime.Input.Characters
 
         public bool HasUnreadInput => _clickedCharacters.Count > 0;
         
-        public ICharacter GetInput()
+        public T GetInput()
         {
             var character = _clickedCharacters.Dequeue();
             Clear();
@@ -29,9 +28,9 @@ namespace Game.Runtime.Input.Characters
             _clickedCharacters.Clear();
         }
 
-        private void OnClick(ICharacter character)
+        private void OnClick(T target)
         {
-            _clickedCharacters.Enqueue(character);
+            _clickedCharacters.Enqueue(target);
         }
     }
 }

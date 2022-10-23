@@ -6,5 +6,7 @@ namespace Game.Runtime.Characters
 {
     public interface ICharacter : IMovement, IVisualization<ICharacterView>, ISceneObject, IBehavior
     {
+        Party Party { get; }
+        Profession Profession { get; }
     }
 }

@@ -1,27 +1,28 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
+using Game.Runtime.Input;
 using Game.Runtime.Input.Characters;
 
 namespace Game.Runtime.Behavior.Session
 {
     public class IsCharacterClickedNode : BehaviorNode
     {
-        private readonly IClickInputs<ICharacter> _characterInputs;
-        private readonly IClickedCharacter _clickedCharacter;
+        private readonly IClickQueue<ICharacter> _characterQueue;
+        private readonly ISelectedCharacter _selectedCharacter;
 
-        public IsCharacterClickedNode(IClickInputs<ICharacter> characterInputs, IClickedCharacter clickedCharacter)
+        public IsCharacterClickedNode(IClickQueue<ICharacter> characterQueue, ISelectedCharacter selectedCharacter)
         {
-            _characterInputs = characterInputs;
-            _clickedCharacter = clickedCharacter;
+            _characterQueue = characterQueue;
+            _selectedCharacter = selectedCharacter;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            if (_characterInputs.HasUnreadInput == false) return BehaviorNodeStatus.Failure;
+            if (_characterQueue.HasUnreadInput == false) return BehaviorNodeStatus.Failure;
             
             
-            _clickedCharacter.Add(_characterInputs.GetInput());
-            _characterInputs.Clear();
+            _selectedCharacter.Add(_characterQueue.GetInput());
+            _characterQueue.Clear();
             return BehaviorNodeStatus.Success;
 
         }

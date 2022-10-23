@@ -2,7 +2,7 @@
 
 namespace Game.Runtime.Input.Characters
 {
-    public class CharacterClickInput : ClickInput<ICharacter, Character>
+    public interface ISelectedCharacter : ISelectedElement<ICharacter>, ICharacter
     {
     }
 }
