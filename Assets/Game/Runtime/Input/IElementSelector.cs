@@ -1,9 +1,9 @@
 ﻿namespace Game.Runtime.Input
 {
-    public interface ISelectedElement<in T>
+    public interface IElementSelector<in T>
     {
         bool Exist { get; }
-        void Add(T element);
+        void Select(T element);
         void Reset();
     }
 }

@@ -7,8 +7,8 @@ namespace Game.Runtime.Environment.Crops.MonoBehaviours
 {
     public class Plant : MonoBehaviour, IPlant
     {
-        public event Action<Plant> Grown;
-
+        public event Action<IPlant> Recovered = delegate { };
+        
         [SerializeField] private Resource _targetResource = Resource.Wheat;
         [SerializeField] private float _growsTime = 5f;
         [SerializeField] private Sprite _grownSprite = null;
@@ -27,7 +27,7 @@ namespace Game.Runtime.Environment.Crops.MonoBehaviours
 
         public Vector2 Position => transform.position;
         
-        public void Gather(IResourcesStorage storage)
+        public void PickUp(IResourcesStorage storage)
         {
             if (ReadyForGather == false)
                 throw new Exception("Plant is not ready for gather");
@@ -52,8 +52,7 @@ namespace Game.Runtime.Environment.Crops.MonoBehaviours
             ReadyForGather = true;
             _spriteRenderer.sprite = _grownSprite;
             _particles.Play();
-            Grown?.Invoke(this);
+            Recovered?.Invoke(this);
         }
-
     }
 }

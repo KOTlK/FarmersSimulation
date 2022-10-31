@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Environment.Crops
 {
-    public interface IPlant : ICollectable, ISceneObject
+    public interface IPlant : ICollectable, ISceneObject, IRecoverable<IPlant>
     {
     }
 }

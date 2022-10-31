@@ -2,7 +2,7 @@
 {
     public enum Party
     {
-        Blue,
-        Red
+        Enemy,
+        Friend
     }
 }

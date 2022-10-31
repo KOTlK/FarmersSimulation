@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Runtime.View.Storage;
+using UnityEngine;
 
 namespace Game.Runtime.Resources
 {
-    public class ResourceStorage: IResourcesStorage
+    public class ResourceStorage : IResourcesStorage
     {
         private readonly Dictionary<Resource, int> _resources = new();
 
@@ -18,10 +20,12 @@ namespace Game.Runtime.Resources
 
         public int Count(Resource resource)
         {
-            if (HasResource(resource) == false)
-                throw new ArgumentException();
+            return _resources.ContainsKey(resource) == false ? 0 : _resources[resource];
+        }
 
-            return _resources[resource];
+        public int Count(IEnumerable<Resource> resources)
+        {
+            return resources.Sum(Count);
         }
 
         public void Visualize(IResourceStorageView view)
@@ -30,13 +34,6 @@ namespace Game.Runtime.Resources
         }
 
         public bool EnoughSpace(int amount) => _count + amount <= _maxCapacity;
-
-        public bool HasResource(Resource resource, int amount = 1)
-        {
-            if (_resources.ContainsKey(resource) == false) return false;
-            
-            return _resources[resource] >= amount;
-        }
 
         public bool IsFull => _count >= _maxCapacity;
         
@@ -60,19 +57,67 @@ namespace Game.Runtime.Resources
             _count += amount;
         }
 
-        public void Remove(Resource resource, int amount = 1)
+        public IResourcePack Take(Resource resource, bool removeAll = false, int amount = 1)
         {
-            if (HasResource(resource, amount) == false)
+            var pack = new List<(Resource, int)>();
+            var count = Count(resource);
+            
+            if (count < amount)
                 throw new Exception($"Storage does not contains enough resource {nameof(resource)}");
-
-            _resources[resource] -= amount;
+            
+            if (removeAll)
+            {
+                _resources[resource] -= count;
+                _count -= count;
+            }
+            else
+            {
+                _resources[resource] -= amount;
+                _count -= amount;
+            }
 
             if (_resources[resource] == 0)
             {
                 _resources.Remove(resource);
             }
+            
+            pack.Add((resource, count));
 
-            _count -= amount;
+            return new ResourcePack(pack);
+        }
+
+        public IResourcePack Take(IEnumerable<(Resource, int)> resources)
+        {
+            var pack = new List<(Resource, int)>();
+            
+            foreach (var (resource, amount) in resources)
+            {
+                if (Count(resource) < amount)
+                    throw new ArgumentException(nameof(resources));
+
+                _resources[resource] -= amount;
+                pack.Add((resource, amount));
+            }
+
+            return new ResourcePack(pack);
+        }
+
+        public IResourcePack Take(IEnumerable<Resource> resources)
+        {
+            var pack = new List<(Resource, int)>();
+            
+            foreach (var resource in resources)
+            {
+                var count = Count(resource);
+                
+                if (count == 0)
+                    continue;
+
+                _resources[resource] -= count;
+                pack.Add((resource, count));
+            }
+
+            return new ResourcePack(pack);
         }
     }
 }

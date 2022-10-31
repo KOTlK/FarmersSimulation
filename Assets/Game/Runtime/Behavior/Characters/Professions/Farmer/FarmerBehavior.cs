@@ -1,5 +1,6 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Resources;
 
@@ -9,16 +10,16 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
     {
         private readonly IBehaviorNode _behavior;
 
-        public FarmerBehavior(IFarmer farmer, IGrownPlants grownPlants, IWorldStorage storage)
+        public FarmerBehavior(IFarmer farmer, IResourceStack<IPlant> grownPlants, IWorldStorage storage)
         {
-            var targetPlant = new TargetPlant();
+            var targetPlant = new PlantSelector();
             
             _behavior = new SelectorNode(new IBehaviorNode[]
             {
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new IsInventoryFullNode(farmer),
-                    new FindWheatNode(grownPlants, targetPlant),
+                    new FindPlantNode(grownPlants, targetPlant),
                     new MoveToNode(farmer, targetPlant),
                     new WaitNode(1000),
                     new GatherWheatNode(targetPlant, farmer)

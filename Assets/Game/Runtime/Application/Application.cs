@@ -6,6 +6,7 @@ using Game.Runtime.Behavior.Characters.Professions;
 using Game.Runtime.Behavior.Characters.Professions.Farmer;
 using Game.Runtime.Characters;
 using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Input;
@@ -17,6 +18,8 @@ using Game.Runtime.Resources;
 using Game.Runtime.Session;
 using Unity.VisualScripting;
 using UnityEngine;
+using Character = Game.Runtime.Characters.Character;
+using ICharacter = Game.Runtime.Characters.ICharacter;
 
 namespace Game.Runtime.Application
 {
@@ -48,7 +51,7 @@ namespace Game.Runtime.Application
                 Characters = characters,
                 CharacterInputs = new ClickQueue<ICharacter>(inputs.ToArray()),
                 Names = _names,
-                Plants = new GrownWheat(plants),
+                Plants = new ResourceStack<IPlant>(plants),
                 Storage = _storage,
                 StorageInputs = new ClickQueue<IWorldStorage>(storageInput)
             };

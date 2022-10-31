@@ -5,11 +5,7 @@ using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Characters.Professions.Farmer
 {
-    public interface IFarmer : ICharacter, IVisualization<IResourceStorageView>
+    public interface IFarmer : ICharacter, IVisualization<IResourceStorageView>, IHarvester
     {
-        bool InventoryFull { get; }
-        bool HasCollectedPlants { get; }
-        void GatherPlant(ICollectable plant);
-        void EmptyPockets(IResourcesStorage targetStorage);
     }
 }

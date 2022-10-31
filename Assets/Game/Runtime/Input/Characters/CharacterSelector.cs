@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Input.Characters
 {
-    public class SelectedCharacter : ISelectedCharacter
+    public class CharacterSelector : ICharacterSelector
     {
         private ICharacter _character = new EmptyCharacter();
 
@@ -16,7 +16,7 @@ namespace Game.Runtime.Input.Characters
 
         public Vector2 Position => _character.Position;
         
-        public void Add(ICharacter character)
+        public void Select(ICharacter character)
         {
             _character = character;
         }

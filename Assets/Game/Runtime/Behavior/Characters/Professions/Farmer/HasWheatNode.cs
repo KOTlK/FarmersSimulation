@@ -14,7 +14,7 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            return _farmer.HasCollectedPlants ? 
+            return _farmer.HasResourceCollected ? 
                 BehaviorNodeStatus.Success : 
                 BehaviorNodeStatus.Failure;
         }

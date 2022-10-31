@@ -5,18 +5,18 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
 {
     public class GatherWheatNode : BehaviorNode
     {
-        private readonly ITargetPlant _plant;
+        private readonly IPlantSelector _plantSelector;
         private readonly IFarmer _farmer;
 
-        public GatherWheatNode(ITargetPlant plant, IFarmer farmer)
+        public GatherWheatNode(IPlantSelector plantSelector, IFarmer farmer)
         {
-            _plant = plant;
+            _plantSelector = plantSelector;
             _farmer = farmer;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            _farmer.GatherPlant(_plant);
+            _farmer.Harvest(_plantSelector);
             return BehaviorNodeStatus.Success;
         }
     }

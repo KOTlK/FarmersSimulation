@@ -3,14 +3,14 @@ using Game.Runtime.Characters;
 
 namespace Game.Runtime.Behavior.Characters.Professions
 {
-    public class Civilian : IBehavior
+    public class CivilianBehavior : IBehavior
     {
         private readonly IBehaviorNode _behavior;
 
         private const long WalkDuration = 2000;
         private const long WaitDuration = 2000;
 
-        public Civilian(IMovement origin)
+        public CivilianBehavior(IMovement origin)
         {
             _behavior = new SequenceNode(
                 new IBehaviorNode[]

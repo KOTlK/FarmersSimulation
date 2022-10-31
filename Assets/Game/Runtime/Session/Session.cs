@@ -14,7 +14,7 @@ using Game.Runtime.Random;
 using Game.Runtime.Resources;
 using Game.Runtime.View.Characters;
 using Game.Runtime.View.Storage;
-using UnityEngine;
+using ICharacter = Game.Runtime.Characters.ICharacter;
 
 namespace Game.Runtime.Session
 {
@@ -25,7 +25,7 @@ namespace Game.Runtime.Session
         public Session(IUserInterfaceRoot ui, SceneData sceneData)
         {
             UI = ui;
-            var selectedCharacter = new SelectedCharacter();
+            var selectedCharacter = new CharacterSelector();
             var randomName = new RandomName(sceneData.Names.text);
             var randomAge = new RandomAge(18, 70);
 
@@ -33,7 +33,7 @@ namespace Game.Runtime.Session
             {
                 IBehavior behavior = character.Profession switch
                 {
-                    Profession.Civilian => new Civilian(character),
+                    Profession.Civilian => new CivilianBehavior(character),
                     Profession.Farmer => new FarmerBehavior((IFarmer)character, sceneData.Plants, sceneData.Storage),
                     Profession.Miner => throw new NotImplementedException(),
                     Profession.Warrior => throw new NotImplementedException(),

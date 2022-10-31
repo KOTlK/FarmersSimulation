@@ -2,7 +2,7 @@
 
 namespace Game.Runtime.Input.Characters
 {
-    public interface ISelectedCharacter : ISelectedElement<ICharacter>, ICharacter
+    public interface ICharacterSelector : IElementSelector<ICharacter>, ICharacter
     {
     }
 }

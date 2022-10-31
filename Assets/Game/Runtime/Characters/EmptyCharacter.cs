@@ -26,7 +26,7 @@ namespace Game.Runtime.Characters
         {
         }
 
-        public Party Party => Party.Red;
+        public Party Party => Party.Friend;
         public Profession Profession => Profession.Civilian;
     }
 }

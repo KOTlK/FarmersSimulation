@@ -7,12 +7,12 @@ namespace Game.Runtime.Behavior.Session
 {
     public class WaitCharacterClickNode : BehaviorNode
     {
-        private readonly ISelectedCharacter _characterSelector;
-        private readonly IClickQueue<ICharacter> _input;
+        private readonly ICharacterSelector _characterSelectorSelector;
+        private readonly IClickQueue<Runtime.Characters.ICharacter> _input;
 
-        public WaitCharacterClickNode(ISelectedCharacter characterSelector, IClickQueue<ICharacter> input)
+        public WaitCharacterClickNode(ICharacterSelector characterSelectorSelector, IClickQueue<Runtime.Characters.ICharacter> input)
         {
-            _characterSelector = characterSelector;
+            _characterSelectorSelector = characterSelectorSelector;
             _input = input;
         }
 
@@ -21,7 +21,7 @@ namespace Game.Runtime.Behavior.Session
             if (_input.HasUnreadInput == false)
                 return BehaviorNodeStatus.Running;
 
-            _characterSelector.Add(_input.GetInput());
+            _characterSelectorSelector.Select(_input.GetInput());
             return BehaviorNodeStatus.Success;
         }
     }

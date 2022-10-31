@@ -10,6 +10,7 @@ namespace Game.Runtime.Characters
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Character : MonoBehaviour, ICharacter
     {
+        [SerializeField] private Party _party;
         [SerializeField] private string _name = "Bob";
         [SerializeField] private float _age = 18f;
         [SerializeField] private float _speed = 5f;
@@ -28,7 +29,7 @@ namespace Game.Runtime.Characters
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        public abstract Party Party { get; }
+        public Party Party => _party;
         public abstract Profession Profession { get; }
         public Vector2 Position => _rigidbody.position;
 
