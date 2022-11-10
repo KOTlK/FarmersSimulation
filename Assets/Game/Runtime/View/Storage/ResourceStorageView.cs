@@ -21,7 +21,7 @@ namespace Game.Runtime.View.Storage
                 if (_spawned.ContainsKey(item))
                 {
                     _spawned[item].SetCount(count);
-                    return;
+                    continue;
                 }
                 
                 var spawnedItem = _itemsFactory.Create(item);

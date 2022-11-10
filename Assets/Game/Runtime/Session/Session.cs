@@ -14,7 +14,6 @@ using Game.Runtime.Random;
 using Game.Runtime.Resources;
 using Game.Runtime.View.Characters;
 using Game.Runtime.View.Storage;
-using ICharacter = Game.Runtime.Characters.ICharacter;
 
 namespace Game.Runtime.Session
 {

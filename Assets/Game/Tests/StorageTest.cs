@@ -5,7 +5,7 @@ using UnityEngine;
 public class StorageTest
 {
     [Test]
-    public void ResourcesComparison()
+    public void ResourcesCompared()
     {
         var storage = new ResourceStorage(1000);
 
@@ -43,17 +43,9 @@ public class StorageTest
     }
 
     [Test]
-    public void RemoveResources()
+    public void CoupleResourcesRemoved()
     {
         var storage = new ResourceStorage(1000);
-
-        storage.Put(Resource.Copper, 5);
-        storage.Take(Resource.Copper, false, 5);
-        Assert.True(storage.Count(Resource.Copper) == 0);
-
-        storage.Put(Resource.Copper);
-        storage.Take(Resource.Copper, true);
-        Assert.True(storage.Count(Resource.Copper) == 0);
 
         storage.Put(Resource.Iron, 10);
         storage.Put(Resource.Gold, 5);
@@ -67,10 +59,47 @@ public class StorageTest
             Resource.Iron,
             Resource.Gold
         }) == 0);
+
+        storage.Put(Resource.Iron, 15);
+        storage.Put(Resource.Gold, 10);
+        storage.Put(Resource.Silver, 30);
+
+        storage.Take(new[]
+        {
+            (Resource.Iron, 10),
+            (Resource.Gold, 10),
+        });
+        
+        Assert.True(storage.Count(new []
+        {
+            Resource.Iron,
+            Resource.Gold,
+            Resource.Silver
+        }) == 35);
     }
 
     [Test]
-    public void TakeAllResources()
+    public void ResourceRemoved()
+    {
+        var storage = new ResourceStorage(1000);
+        
+        storage.Put(Resource.Copper, 5);
+        storage.Take(Resource.Copper, false, 5);
+        Assert.True(storage.Count(Resource.Copper) == 0);
+    }
+
+    [Test]
+    public void AllResourcesRemoved()
+    {
+        var storage = new ResourceStorage(1000);
+
+        storage.Put(Resource.Copper);
+        storage.Take(Resource.Copper, true);
+        Assert.True(storage.Count(Resource.Copper) == 0);
+    }
+
+    [Test]
+    public void AllResourcesTaken()
     {
         var storage = new ResourceStorage(1000);
 
@@ -90,7 +119,7 @@ public class StorageTest
     }
 
     [Test]
-    public void TransferResources()
+    public void ResourcesTransfered()
     {
         var storage = new ResourceStorage(1000);
         var secondStorage = new ResourceStorage(1000);

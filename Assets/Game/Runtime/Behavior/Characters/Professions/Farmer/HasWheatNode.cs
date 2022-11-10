@@ -5,16 +5,16 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
 {
     public class HasWheatNode : BehaviorNode
     {
-        private readonly IFarmer _farmer;
+        private readonly IHarvester _harvester;
 
-        public HasWheatNode(IFarmer farmer)
+        public HasWheatNode(IHarvester harvester)
         {
-            _farmer = farmer;
+            _harvester = harvester;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            return _farmer.HasResourceCollected ? 
+            return _harvester.HasResourceCollected ? 
                 BehaviorNodeStatus.Success : 
                 BehaviorNodeStatus.Failure;
         }

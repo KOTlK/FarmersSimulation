@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "0d8d027b981f2d0f28a8505c1c1db1d28c2d19d3"
     },
+    "com.kotik.requireinterface": {
+      "version": "file:D:/Unity/Projects/RequireInterface",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,

@@ -4,6 +4,6 @@ namespace Game.Runtime.Characters
 {
     public interface IMovement
     {
-        void Move(Vector2 direction);
+        Vector2 Direction { get; set; }
     }
 }

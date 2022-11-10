@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Runtime.View.Storage;
-using UnityEngine;
 
 namespace Game.Runtime.Resources
 {
@@ -35,11 +34,9 @@ namespace Game.Runtime.Resources
 
         public bool EnoughSpace(int amount) => _count + amount <= _maxCapacity;
 
-        public bool IsFull => _count >= _maxCapacity;
-        
         public void Put(Resource resource, int amount = 1)
         {
-            if (IsFull)
+            if (_count >= _maxCapacity)
                 throw new Exception($"Storage is full");
             
             if (_count + amount > _maxCapacity)

@@ -1,6 +1,7 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
 using Game.Runtime.View;
+using UnityEngine;
 
 namespace Game.Runtime.Behavior.Characters.Professions
 {
@@ -20,9 +21,12 @@ namespace Game.Runtime.Behavior.Characters.Professions
             var direction = _randomPoint.Position - _character.Position;
 
             if (direction.sqrMagnitude <= 4f)
+            {
+                _character.Direction = Vector2.zero;
                 return BehaviorNodeStatus.Success;
+            }
 
-            _character.Move(direction.normalized);
+            _character.Direction = direction.normalized;
             return BehaviorNodeStatus.Running;
         }
 

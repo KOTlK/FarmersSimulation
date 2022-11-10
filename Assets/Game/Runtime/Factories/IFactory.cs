@@ -1,4 +1,4 @@
-﻿namespace Game.Runtime.Dynamic
+﻿namespace Game.Game.Runtime.Factories
 {
     public interface IFactory<out T>
     {

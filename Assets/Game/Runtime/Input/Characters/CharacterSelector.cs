@@ -10,7 +10,6 @@ namespace Game.Runtime.Input.Characters
         private ICharacter _character = new EmptyCharacter();
 
         public bool Exist => _character != null;
-        public void Move(Vector2 direction) => _character.Move(direction);
 
         public void Visualize(ICharacterView view) => _character.Visualize(view);
 
@@ -31,5 +30,10 @@ namespace Game.Runtime.Input.Characters
         public void Execute(long time) => _character.Execute(time);
         public Party Party => _character.Party;
         public Profession Profession => _character.Profession;
+        public Vector2 Direction
+        {
+            get => _character.Direction;
+            set => _character.Direction = value;
+        }
     }
 }

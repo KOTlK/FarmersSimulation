@@ -14,8 +14,6 @@ namespace Game.Runtime.Resources
         public int Count(IEnumerable<Resource> resource) => _storage.Count(resource);
 
         public bool EnoughSpace(int amount) => _storage.EnoughSpace(amount);
-
-        public bool IsFull => _storage.IsFull;
         public void Put(Resource resource, int amount = 1)
         {
             _storage.Put(resource, amount);

@@ -18,7 +18,7 @@ namespace Game.Runtime.Behavior.Characters
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            _origin.Move(_direction);
+            _origin.Direction = _direction;
             return BehaviorNodeStatus.Running;
         }
 

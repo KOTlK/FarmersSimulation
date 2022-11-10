@@ -7,6 +7,5 @@ namespace Game.Runtime.Resources
         int Count(Resource resource);
         int Count(IEnumerable<Resource> resources);
         bool EnoughSpace(int amount);
-        bool IsFull { get; }
     }
 }

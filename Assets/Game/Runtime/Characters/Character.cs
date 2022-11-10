@@ -29,11 +29,18 @@ namespace Game.Runtime.Characters
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
+        private void FixedUpdate()
+        {
+            if (Direction != Vector2.zero)
+                Move(Direction);
+        }
+
+        public Vector2 Direction { get; set; }
         public Party Party => _party;
         public abstract Profession Profession { get; }
         public Vector2 Position => _rigidbody.position;
 
-        public void Move(Vector2 direction)
+        private void Move(Vector2 direction)
         {
             if (direction.sqrMagnitude > 1.1f)
                 throw new ArgumentException($"{nameof(direction)} should be normalized, now it's magnitude is {direction.sqrMagnitude}", nameof(direction));

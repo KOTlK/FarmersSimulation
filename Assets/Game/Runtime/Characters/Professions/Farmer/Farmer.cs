@@ -11,7 +11,7 @@ namespace Game.Runtime.Characters.Professions.Farmer
 
         public override Profession Profession => Profession.Farmer;
         public bool HasResourceCollected => _inventory.Count(Resource.Wheat) > 0;
-        public bool InventoryFull => _inventory.IsFull;
+        public bool InventoryFull => _inventory.EnoughSpace(1) == false;
 
         public void Visualize(IResourceStorageView view)
         {

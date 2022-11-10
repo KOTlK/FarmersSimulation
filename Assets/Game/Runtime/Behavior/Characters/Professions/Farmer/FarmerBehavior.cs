@@ -19,16 +19,16 @@ namespace Game.Runtime.Behavior.Characters.Professions.Farmer
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new IsInventoryFullNode(farmer),
-                    new FindPlantNode(grownPlants, targetPlant),
-                    new MoveToNode(farmer, targetPlant),
+                    new FindResourceNode<IPlant>(grownPlants, targetPlant),
+                    new MoveTowardsNode(farmer, targetPlant),
                     new WaitNode(1000),
-                    new GatherWheatNode(targetPlant, farmer)
+                    new HarvestResourceNode(targetPlant, farmer)
                 }),
                 
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new HasWheatNode(farmer),
-                    new MoveToNode(farmer, storage),
+                    new MoveTowardsNode(farmer, storage),
                     new EmptyPocketsNode(storage, farmer)
                 }),
                 

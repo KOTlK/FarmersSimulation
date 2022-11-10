@@ -10,7 +10,6 @@ namespace Game.Runtime.Environment.Mines
         {
             var mines = GetComponentsInChildren<Mine>();
             _stack = new ResourceStack<IMine>(mines);
-            Debug.Log(mines.Length);
         }
 
         public bool HasResource => _stack.HasResource;
