@@ -19,13 +19,14 @@ namespace Game.Runtime.Resources
             _storage.Put(resource, amount);
         }
 
-        public IResourcePack Take(Resource resource, bool removeAll = false, int amount = 1)
+        public IResourcePack Take(Resource resource, int amount = 1)
         {
-            return _storage.Take(resource, removeAll, amount);
+            return _storage.Take(resource, amount);
         }
 
         public IResourcePack Take(IEnumerable<(Resource, int)> resources) => _storage.Take(resources);
         public IResourcePack Take(IEnumerable<Resource> resources) => _storage.Take(resources);
+        public IResourcePack Take() => _storage.Take();
 
         public Vector2 Position => transform.position;
     }

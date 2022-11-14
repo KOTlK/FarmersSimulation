@@ -11,8 +11,14 @@ namespace Game.Runtime.Environment.Mines
         
         [SerializeField] private Resource _resource = Resource.Copper;
         [SerializeField] private float _recoverTime = 2f;
+
+        [field: SerializeField] public bool ReadyForGather { get; private set; } = false;
+
+        private void Awake()
+        {
+            StartCoroutine(Waiting(_recoverTime));
+        }
         
-        public bool ReadyForGather { get; private set; } = true;
         public void PickUp(IResourcesStorage storage)
         {
             if (storage.EnoughSpace(1) == false)
@@ -26,7 +32,10 @@ namespace Game.Runtime.Environment.Mines
         {
             ReadyForGather = false;
             yield return new WaitForSeconds(time);
+            Recovered.Invoke(this);
             ReadyForGather = true;
         }
+
+        public Vector2 Position => transform.position;
     }
 }

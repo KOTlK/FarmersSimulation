@@ -1,7 +1,7 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters.Professions.Farmer;
 
-namespace Game.Runtime.Behavior.Characters.Professions.Farmer
+namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class IsInventoryFullNode : BehaviorNode
     {

@@ -2,14 +2,14 @@
 using Game.Runtime.Characters.Professions.Farmer;
 using Game.Runtime.Resources;
 
-namespace Game.Runtime.Behavior.Characters.Professions.Farmer
+namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class EmptyPocketsNode : BehaviorNode
     {
         private readonly IWorldStorage _storage;
-        private readonly IFarmer _farmer;
+        private readonly IHarvester _farmer;
 
-        public EmptyPocketsNode(IWorldStorage storage, IFarmer farmer)
+        public EmptyPocketsNode(IWorldStorage storage, IHarvester farmer)
         {
             _storage = storage;
             _farmer = farmer;

@@ -33,7 +33,10 @@ namespace Game.Runtime.Characters.Professions.Farmer
             if (targetStorage.EnoughSpace(count) == false)
                 throw new Exception($"Not enough space in {nameof(targetStorage)}");
             
-            _inventory.Take(Resource.Wheat, true);
+            _inventory.Take(new []
+            {
+                Resource.Wheat
+            });
             targetStorage.Put(Resource.Wheat, count);
         }
     }

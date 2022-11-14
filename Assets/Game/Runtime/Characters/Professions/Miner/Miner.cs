@@ -25,10 +25,7 @@ namespace Game.Runtime.Characters.Professions.Miner
         {
             if (HasResourceCollected)
             {
-                var pack = _inventory.Take(new []
-                {
-                    (Resource.Copper, _inventory.Count(Resource.Copper))
-                });
+                var pack = _inventory.Take();
                 pack.Transfer(targetStorage);
             }
         }

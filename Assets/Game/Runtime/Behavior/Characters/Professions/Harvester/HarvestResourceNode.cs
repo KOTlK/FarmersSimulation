@@ -2,7 +2,7 @@
 using Game.Runtime.Characters.Professions.Farmer;
 using Game.Runtime.Environment.Crops;
 
-namespace Game.Runtime.Behavior.Characters.Professions.Farmer
+namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class HarvestResourceNode : BehaviorNode
     {

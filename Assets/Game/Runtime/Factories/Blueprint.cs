@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Game.Runtime.Resources;
 using UnityEngine;
@@ -24,7 +23,7 @@ namespace Game.Game.Runtime.Factories
 
             foreach (var income in _income)
             {
-                incomeStorage.Take(income.Resource, false, income.Amount);
+                incomeStorage.Take(income.Resource, income.Amount);
             }
 
             var pack = _outcome.Select(outcome => (outcome.Resource, outcome.Amount)).ToList();

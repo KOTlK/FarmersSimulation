@@ -54,7 +54,7 @@ namespace Game.Runtime.Resources
             _count += amount;
         }
 
-        public IResourcePack Take(Resource resource, bool removeAll = false, int amount = 1)
+        public IResourcePack Take(Resource resource, int amount = 1)
         {
             var pack = new List<(Resource, int)>();
             var count = Count(resource);
@@ -62,16 +62,8 @@ namespace Game.Runtime.Resources
             if (count < amount)
                 throw new Exception($"Storage does not contains enough resource {nameof(resource)}");
             
-            if (removeAll)
-            {
-                _resources[resource] -= count;
-                _count -= count;
-            }
-            else
-            {
-                _resources[resource] -= amount;
-                _count -= amount;
-            }
+            _resources[resource] -= amount;
+            _count -= amount;
 
             if (_resources[resource] == 0)
             {
@@ -93,6 +85,7 @@ namespace Game.Runtime.Resources
                     throw new ArgumentException(nameof(resources));
 
                 _resources[resource] -= amount;
+                _count -= amount;
                 pack.Add((resource, amount));
             }
 
@@ -111,6 +104,22 @@ namespace Game.Runtime.Resources
                     continue;
 
                 _resources[resource] -= count;
+                _count -= count;
+                pack.Add((resource, count));
+            }
+
+            return new ResourcePack(pack);
+        }
+
+        public IResourcePack Take()
+        {
+            var pack = new List<(Resource, int)>();
+
+            foreach (var (resource, count) in _resources.ToArray())
+            {
+                _count -= count;
+                _resources[resource] -= count;
+
                 pack.Add((resource, count));
             }
 

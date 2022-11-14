@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Game.Runtime.Resources;
+﻿using Game.Runtime.Resources;
 using Kotik.RequireInterface;
 using UnityEngine;
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions;
-using Game.Runtime.Behavior.Characters.Professions.Farmer;
+using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Characters;
 using Game.Runtime.Characters.Professions.Farmer;
 using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
+using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input;
 using Game.Runtime.Input.Characters;
 using Game.Runtime.Input.View;
@@ -29,6 +30,7 @@ namespace Game.Runtime.Application
         [SerializeField] private Transform _debugUIParent;
         [SerializeField] private TreeVisualization _debugGraph;
         [SerializeField] private WorldStorage _storage;
+        [SerializeField] private MineStack _mines;
         [SerializeField] private TreeVisualization _debugSession;
         [SerializeField] private UIRoot _uiRoot = null;
         [SerializeField] private bool _visualizeBehaviors = false;
@@ -51,7 +53,8 @@ namespace Game.Runtime.Application
                 Characters = characters,
                 CharacterInputs = new ClickQueue<ICharacter>(inputs.ToArray()),
                 Names = _names,
-                Plants = new ResourceStack<IPlant>(plants),
+                Plants = new Behavior.Characters.Professions.Harvester.ResourceStack<IPlant>(plants),
+                Mines = _mines,
                 Storage = _storage,
                 StorageInputs = new ClickQueue<IWorldStorage>(storageInput)
             };

@@ -2,7 +2,7 @@
 
 namespace Game.Runtime.Characters.Professions.Miner
 {
-    public interface IMiner : ICharacter, IHarvester
+    public interface IMiner : IHarvester
     {
         
     }

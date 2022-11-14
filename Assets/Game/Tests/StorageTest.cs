@@ -1,6 +1,5 @@
 using Game.Runtime.Resources;
 using NUnit.Framework;
-using UnityEngine;
 
 public class StorageTest
 {
@@ -84,7 +83,7 @@ public class StorageTest
         var storage = new ResourceStorage(1000);
         
         storage.Put(Resource.Copper, 5);
-        storage.Take(Resource.Copper, false, 5);
+        storage.Take(Resource.Copper, 5);
         Assert.True(storage.Count(Resource.Copper) == 0);
     }
 
@@ -94,7 +93,10 @@ public class StorageTest
         var storage = new ResourceStorage(1000);
 
         storage.Put(Resource.Copper);
-        storage.Take(Resource.Copper, true);
+        storage.Take(new []
+        {
+            Resource.Copper
+        });
         Assert.True(storage.Count(Resource.Copper) == 0);
     }
 
@@ -116,6 +118,10 @@ public class StorageTest
             Resource.Copper,
             Resource.Iron
         }) == 0);
+
+        storage.Put(Resource.Wheat, 100);
+        storage.Take();
+        Assert.True(storage.EnoughSpace(1000) == true);
     }
 
     [Test]
@@ -123,11 +129,6 @@ public class StorageTest
     {
         var storage = new ResourceStorage(1000);
         var secondStorage = new ResourceStorage(1000);
-
-        storage.Put(Resource.Copper, 100);
-        storage.Take(Resource.Copper, true).Transfer(secondStorage);
-        Assert.True(secondStorage.Count(Resource.Copper) == 100);
-
 
         storage.Put(Resource.Iron, 10);
         storage.Put(Resource.Gold, 30);
@@ -140,8 +141,45 @@ public class StorageTest
         {
             Resource.Iron,
             Resource.Gold,
-            Resource.Copper
-        }) == 140);
+        }) == 40);
+        Assert.True(storage.EnoughSpace(1000) == true);
+    }
+
+    [Test]
+    public void CountCorrect()
+    {
+        var storage = new ResourceStorage(10);
+
+        storage.Put(Resource.Iron, 9);
+        Assert.True(storage.EnoughSpace(1) == true);
+        Assert.True(storage.EnoughSpace(2) == false);
+
+        storage.Take(Resource.Iron, 5);
+        Assert.True(storage.EnoughSpace(6) == true);
+        Assert.True(storage.EnoughSpace(7) == false);
+
+        storage.Put(Resource.Wheat, 5);
+        storage.Take(new[]
+        {
+            (Resource.Iron, 3),
+            (Resource.Wheat, 3)
+        });
+        Assert.True(storage.EnoughSpace(7) == true);
+        Assert.True(storage.EnoughSpace(8) == false);
+
+        
+        storage.Take();
+        Assert.True(storage.EnoughSpace(10) == true);
+        Assert.True(storage.EnoughSpace(11) == false);
+
+        storage.Put(Resource.Gold, 5);
+        storage.Put(Resource.Silver, 5);
+        storage.Take(new[]
+        {
+            Resource.Gold
+        });
+        Assert.True(storage.EnoughSpace(5) == true);
+        Assert.True(storage.EnoughSpace(6) == false);
     }
 
 }

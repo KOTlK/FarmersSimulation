@@ -3,11 +3,13 @@ using BananaParty.BehaviorTree;
 using Game.Runtime.Application;
 using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions;
-using Game.Runtime.Behavior.Characters.Professions.Farmer;
+using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Behavior.Session;
 using Game.Runtime.Behavior.Session.View;
 using Game.Runtime.Characters;
 using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Environment.Crops;
+using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input.Characters;
 using Game.Runtime.Input.View;
 using Game.Runtime.Random;
@@ -33,8 +35,8 @@ namespace Game.Runtime.Session
                 IBehavior behavior = character.Profession switch
                 {
                     Profession.Civilian => new CivilianBehavior(character),
-                    Profession.Farmer => new FarmerBehavior((IFarmer)character, sceneData.Plants, sceneData.Storage),
-                    Profession.Miner => throw new NotImplementedException(),
+                    Profession.Farmer => new HarvesterBehavior<IPlant>((IHarvester)character, sceneData.Plants, sceneData.Storage),
+                    Profession.Miner => new HarvesterBehavior<IMine>((IHarvester)character, sceneData.Mines, sceneData.Storage),
                     Profession.Warrior => throw new NotImplementedException(),
                     _ => throw new NotImplementedException()
                 };

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Runtime.Behavior.Characters.Professions.Harvester;
+using UnityEngine;
 
 namespace Game.Runtime.Environment.Mines
 {
@@ -10,6 +11,11 @@ namespace Game.Runtime.Environment.Mines
         {
             var mines = GetComponentsInChildren<Mine>();
             _stack = new ResourceStack<IMine>(mines);
+        }
+
+        private void OnDestroy()
+        {
+            _stack.Dispose();
         }
 
         public bool HasResource => _stack.HasResource;
