@@ -10,20 +10,10 @@ namespace Game.Runtime.Characters
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Character : MonoBehaviour, ICharacter
     {
-        [SerializeField] private Party _party;
-        [SerializeField] private string _name = "Bob";
-        [SerializeField] private float _age = 18f;
         [SerializeField] private float _speed = 5f;
-
+        
         private Rigidbody2D _rigidbody;
-        private IBehavior _behavior;
-
-        public void Initialize(IRandomGenerator<string> randomName, IRandomGenerator<float> randomAge, IBehavior behavior)
-        {
-            _name = randomName.Next();
-            _age = randomAge.Next();
-            _behavior = behavior;
-        }
+        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -36,8 +26,6 @@ namespace Game.Runtime.Characters
         }
 
         public Vector2 Direction { get; set; }
-        public Party Party => _party;
-        public abstract Profession Profession { get; }
         public Vector2 Position => _rigidbody.position;
 
         private void Move(Vector2 direction)
@@ -49,19 +37,5 @@ namespace Game.Runtime.Characters
             _rigidbody.MovePosition(_rigidbody.position + deltaMovement);
         }
 
-        public void Visualize(ICharacterView view)
-        {
-            view.DisplayAge(_age);
-            view.DisplayName(_name);
-            view.DisplayProfession(Profession);
-            view.DisplayBehavior(_behavior);
-        }
-
-        public void Visualize(ITreeGraph<IReadOnlyBehaviorNode> view) => _behavior.Visualize(view);
-
-        public void Execute(long time)
-        {
-            _behavior.Execute(time);
-        }
     }
 }

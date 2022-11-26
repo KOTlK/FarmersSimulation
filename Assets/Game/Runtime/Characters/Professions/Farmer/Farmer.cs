@@ -5,7 +5,7 @@ using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Characters.Professions.Farmer
 {
-    public class Farmer : Character, IFarmer
+    public class Farmer : FriendlyCharacter, IFarmer
     {
         private readonly IResourcesStorage _inventory = new ResourceStorage(15);
 

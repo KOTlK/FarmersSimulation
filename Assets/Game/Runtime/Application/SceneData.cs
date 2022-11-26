@@ -1,4 +1,5 @@
 ﻿using Game.Runtime.Characters;
+using Game.Runtime.Characters.Professions;
 using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Mines;
@@ -10,8 +11,8 @@ namespace Game.Runtime.Application
 {
     public struct SceneData
     {
-        public Character[] Characters { get; set; }
-        public IClickQueue<ICharacter> CharacterInputs { get; set; }
+        public FriendlyCharacter[] Characters { get; set; }
+        public IClickQueue<IFriendlyCharacter> CharacterInputs { get; set; }
         public IResourceStack<IPlant> Plants { get; set; }
         public IResourceStack<IMine> Mines { get; set; }
         public IWorldStorage Storage { get; set; }

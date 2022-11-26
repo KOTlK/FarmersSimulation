@@ -1,25 +1,52 @@
-﻿namespace Game.Runtime.Characters.Weapons
+﻿using System;
+using System.Linq;
+using Game.Runtime.Characters.Professions.Warrior;
+
+namespace Game.Runtime.Characters.Weapons
 {
     public abstract class MeleeWeapon : IMeleeWeapon
     {
-        private readonly IWeaponTargets _targets;
         private readonly float _damage;
+        private readonly float _range;
+        private readonly float _width;
+        
+        private IWeaponTargets _targets;
+        private Party _ownerParty;
 
-        protected MeleeWeapon(IWeaponTargets targets, float damage, float range, float width)
+        protected MeleeWeapon(float damage, float range, float width)
         {
-            _targets = targets;
             _damage = damage;
-            _targets.SetRange(range);
-            _targets.SetWidth(width);
+            _range = range;
+            _width = width;
         }
 
         public void Attack()
         {
-            foreach (var target in _targets.TargetsInRange)
+            var party = GetParty(_ownerParty);
+            var targets = _targets.TargetsInRange.Where(target => target.Party == party);
+            
+            foreach (var target in targets)
             {
                 target.ApplyDamage(_damage);
             }
         }
 
+        public void Equip(IWarrior warrior)
+        {
+            _ownerParty = warrior.Party;
+            _targets = warrior.Targets;
+            _targets.SetRange(_range);
+            _targets.SetWidth(_width);
+        }
+
+        private static Party GetParty(Party current)
+        {
+            return current switch
+            {
+                Party.Enemy => Party.Friend,
+                Party.Friend => Party.Enemy,
+                _ => throw new ArgumentOutOfRangeException(nameof(current), current, null)
+            };
+        }
     }
 }

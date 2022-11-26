@@ -2,7 +2,7 @@
 
 namespace Game.Runtime.View.Characters
 {
-    public interface ICharacterView : IAgeView, IProfessionView, INameView
+    public interface IFriendlyCharacterView : IAgeView, INameView, IProfessionView
     {
         void DisplayBehavior(IBehavior behavior);
     }

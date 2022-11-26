@@ -3,7 +3,7 @@ using Game.Runtime.Resources;
 
 namespace Game.Runtime.Characters.Professions.Farmer
 {
-    public interface IHarvester : ICharacter
+    public interface IHarvester : IFriendlyCharacter
     {
         bool InventoryFull { get; }
         bool HasResourceCollected { get; }

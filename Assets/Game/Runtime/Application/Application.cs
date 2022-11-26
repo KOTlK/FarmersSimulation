@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Game.Runtime.Behavior;
-using Game.Runtime.Behavior.Characters.Professions;
 using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Characters;
-using Game.Runtime.Characters.Professions.Farmer;
-using Game.Runtime.Environment;
+using Game.Runtime.Characters.Professions;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input;
-using Game.Runtime.Input.Characters;
 using Game.Runtime.Input.View;
-using Game.Runtime.Random;
 using Game.Runtime.Rendering;
 using Game.Runtime.Resources;
 using Game.Runtime.Session;
-using Unity.VisualScripting;
 using UnityEngine;
-using Character = Game.Runtime.Characters.Character;
-using ICharacter = Game.Runtime.Characters.ICharacter;
 
 namespace Game.Runtime.Application
 {
@@ -41,8 +32,8 @@ namespace Game.Runtime.Application
         private void Start()
         {
             var plants = FindObjectsOfType<Plant>();
-            var characters = FindObjectsOfType<Character>();
-            var inputs = characters.Select(character => character.GetComponent<IClickInput<ICharacter>>());
+            var characters = FindObjectsOfType<FriendlyCharacter>();
+            var inputs = characters.Select(character => character.GetComponent<IClickInput<IFriendlyCharacter>>());
             var storageInput = new IClickInput<IWorldStorage>[1]
             {
                 _storage.GetComponent<IClickInput<IWorldStorage>>()
@@ -51,9 +42,9 @@ namespace Game.Runtime.Application
             var sceneData = new SceneData
             {
                 Characters = characters,
-                CharacterInputs = new ClickQueue<ICharacter>(inputs.ToArray()),
+                CharacterInputs = new ClickQueue<IFriendlyCharacter>(inputs.ToArray()),
                 Names = _names,
-                Plants = new Behavior.Characters.Professions.Harvester.ResourceStack<IPlant>(plants),
+                Plants = new ResourceStack<IPlant>(plants),
                 Mines = _mines,
                 Storage = _storage,
                 StorageInputs = new ClickQueue<IWorldStorage>(storageInput)

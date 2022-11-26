@@ -7,13 +7,13 @@ namespace Game.Runtime.Behavior.Session
 {
     public class IsCharacterClickedNode : BehaviorNode
     {
-        private readonly IClickQueue<Runtime.Characters.ICharacter> _characterQueue;
-        private readonly ICharacterSelector _characterSelector;
+        private readonly IClickQueue<Runtime.Characters.IFriendlyCharacter> _characterQueue;
+        private readonly IFriendlyCharacterSelector _friendlyCharacterSelector;
 
-        public IsCharacterClickedNode(IClickQueue<Runtime.Characters.ICharacter> characterQueue, ICharacterSelector characterSelector)
+        public IsCharacterClickedNode(IClickQueue<Runtime.Characters.IFriendlyCharacter> characterQueue, IFriendlyCharacterSelector friendlyCharacterSelector)
         {
             _characterQueue = characterQueue;
-            _characterSelector = characterSelector;
+            _friendlyCharacterSelector = friendlyCharacterSelector;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
@@ -21,7 +21,7 @@ namespace Game.Runtime.Behavior.Session
             if (_characterQueue.HasUnreadInput == false) return BehaviorNodeStatus.Failure;
             
             
-            _characterSelector.Select(_characterQueue.GetInput());
+            _friendlyCharacterSelector.Select(_characterQueue.GetInput());
             _characterQueue.Clear();
             return BehaviorNodeStatus.Success;
 

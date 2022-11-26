@@ -1,4 +1,5 @@
-﻿using Game.Runtime.Characters.Professions.Warrior;
+﻿using Game.Runtime.Characters;
+using Game.Runtime.Characters.Professions.Warrior;
 using UnityEngine;
 
 namespace Game.Tests.PlayModeTests.Damage
@@ -7,6 +8,7 @@ namespace Game.Tests.PlayModeTests.Damage
     {
         [SerializeField] private float _health = 10f;
 
+        public Party Party => Party.Enemy;
         public bool IsDead => _health <= 0;
         public void ApplyDamage(float amount)
         {

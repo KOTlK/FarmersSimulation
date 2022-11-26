@@ -1,6 +1,6 @@
 ﻿namespace Game.Runtime.Characters.Professions
 {
-    public class Civilian : Character
+    public class Civilian : FriendlyCharacter
     {
         public override Profession Profession => Profession.Civilian;
 

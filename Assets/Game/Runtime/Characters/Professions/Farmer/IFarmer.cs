@@ -5,7 +5,7 @@ using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Characters.Professions.Farmer
 {
-    public interface IFarmer : ICharacter, IVisualization<IResourceStorageView>, IHarvester
+    public interface IFarmer : IFriendlyCharacter, IVisualization<IResourceStorageView>, IHarvester
     {
     }
 }

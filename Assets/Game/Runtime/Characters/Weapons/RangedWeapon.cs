@@ -1,5 +1,6 @@
 ﻿
 using Game.Game.Runtime.Pooling;
+using Game.Runtime.Characters.Professions.Warrior;
 
 namespace Game.Runtime.Characters.Weapons
 {
@@ -18,6 +19,11 @@ namespace Game.Runtime.Characters.Weapons
         {
             var projectile = _pool.Pop();
             projectile.Shoot(_crosshair.Direction);
+        }
+
+        public void Equip(IWarrior warrior)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

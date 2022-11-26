@@ -3,7 +3,7 @@ using Game.Runtime.Resources;
 
 namespace Game.Runtime.Characters.Professions.Miner
 {
-    public class Miner : Character, IMiner
+    public class Miner : FriendlyCharacter, IMiner
     {
         private readonly IResourcesStorage _inventory = new ResourceStorage(10);
         

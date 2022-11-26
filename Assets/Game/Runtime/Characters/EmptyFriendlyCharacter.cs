@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Game.Runtime.Characters
 {
-    public class EmptyCharacter : ICharacter
+    public class EmptyFriendlyCharacter : IFriendlyCharacter
     {
-        public void Visualize(ICharacterView view)
+        public void Visualize(IFriendlyCharacterView view)
         {
             view.DisplayAge(0);
             view.DisplayName(" ");
-            view.DisplayProfession(Profession.Civilian);
         }
 
         public Vector2 Position => Vector2.negativeInfinity;

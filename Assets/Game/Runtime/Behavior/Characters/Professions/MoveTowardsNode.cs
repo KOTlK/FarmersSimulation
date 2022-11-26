@@ -7,26 +7,26 @@ namespace Game.Runtime.Behavior.Characters.Professions
 {
     public class MoveTowardsNode : BehaviorNode
     {
-        private readonly ICharacter _character;
+        private readonly IFriendlyCharacter _friendlyCharacter;
         private readonly ISceneObject _target;
 
-        public MoveTowardsNode(ICharacter character, ISceneObject target)
+        public MoveTowardsNode(IFriendlyCharacter friendlyCharacter, ISceneObject target)
         {
-            _character = character;
+            _friendlyCharacter = friendlyCharacter;
             _target = target;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            var direction = _target.Position - _character.Position;
+            var direction = _target.Position - _friendlyCharacter.Position;
 
             if (direction.sqrMagnitude <= 2f)
             {
-                _character.Direction = Vector2.zero;
+                _friendlyCharacter.Direction = Vector2.zero;
                 return BehaviorNodeStatus.Success;
             }
 
-            _character.Direction = direction.normalized;
+            _friendlyCharacter.Direction = direction.normalized;
             return BehaviorNodeStatus.Running;
         }
     }

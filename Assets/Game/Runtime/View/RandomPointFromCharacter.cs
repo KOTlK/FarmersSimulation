@@ -5,12 +5,12 @@ namespace Game.Runtime.View
 {
     public class RandomPointFromCharacter : ISceneObject
     {
-        private readonly ICharacter _character;
+        private readonly IFriendlyCharacter _friendlyCharacter;
         private readonly float _distance;
 
-        public RandomPointFromCharacter(ICharacter character, float distance)
+        public RandomPointFromCharacter(IFriendlyCharacter friendlyCharacter, float distance)
         {
-            _character = character;
+            _friendlyCharacter = friendlyCharacter;
             _distance = distance;
             Next();
         }
@@ -19,7 +19,7 @@ namespace Game.Runtime.View
 
         public void Next()
         {
-            Position = _character.Position + UnityEngine.Random.insideUnitCircle * _distance;
+            Position = _friendlyCharacter.Position + UnityEngine.Random.insideUnitCircle * _distance;
         }
     }
 }

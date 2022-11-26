@@ -13,6 +13,7 @@ namespace Game.Runtime.Characters.HP
         {
             _max = max;
             _min = min;
+            _current = max;
         }
 
         public bool IsOver => _current <= _min;
@@ -29,7 +30,7 @@ namespace Game.Runtime.Characters.HP
         
         public void Visualize(IHealthView view)
         {
-            view.DisplayHealth(_current);
+            view.DisplayHealth(_current, _max);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Game.Runtime.Input.View
     public class CharacterInfoElement : MonoBehaviour, ICharacterInfoElement
     {
         [SerializeField] private Button _closeButton = null;
-        [SerializeField] private CharacterView _characterView = null;
+        [SerializeField] private FriendlyCharacterView _friendlyCharacterView = null;
 
         public bool IsActive
         {
@@ -20,6 +20,6 @@ namespace Game.Runtime.Input.View
 
         public IButton CloseButton => _closeButton;
 
-        public ICharacterView CharacterView => _characterView;
+        public IFriendlyCharacterView FriendlyCharacterView => _friendlyCharacterView;
     }
 }

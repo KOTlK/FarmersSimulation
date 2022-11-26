@@ -26,7 +26,7 @@ namespace Game.Runtime.Session
         public Session(IUserInterfaceRoot ui, SceneData sceneData)
         {
             UI = ui;
-            var selectedCharacter = new CharacterSelector();
+            var selectedCharacter = new FriendlyCharacterSelector();
             var randomName = new RandomName(sceneData.Names.text);
             var randomAge = new RandomAge(18, 70);
 
@@ -47,7 +47,7 @@ namespace Game.Runtime.Session
             _behavior = new ParallelSequenceNode(new IBehaviorNode[]
             {
                 new ExecuteBehaviorsNode(sceneData.Characters),
-                
+
                 new ParallelSelectorNode(new IBehaviorNode[]
                 {
                     new SelectorNode(new IBehaviorNode[]
@@ -64,7 +64,7 @@ namespace Game.Runtime.Session
                             new ParallelSequenceNode(new IBehaviorNode[]
                             {
                                 new WaitButtonClickNode(ui.CharacterInfoElement.CloseButton).Invert(),
-                                new RenderNode<ICharacter, ICharacterView>(selectedCharacter, ui.CharacterInfoElement.CharacterView),
+                                new RenderNode<IFriendlyCharacter, IFriendlyCharacterView>(selectedCharacter, ui.CharacterInfoElement.FriendlyCharacterView),
                                 new WaitCharacterClickNode(selectedCharacter, sceneData.CharacterInputs)
                             }).RepeatUntilFailure().Invert(),
                             new DeactivateElementNode(ui.CharacterInfoElement)

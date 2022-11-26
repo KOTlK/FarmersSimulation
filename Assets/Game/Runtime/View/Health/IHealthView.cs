@@ -2,6 +2,6 @@
 {
     public interface IHealthView
     {
-        void DisplayHealth(float amount);
+        void DisplayHealth(float amount, float max);
     }
 }

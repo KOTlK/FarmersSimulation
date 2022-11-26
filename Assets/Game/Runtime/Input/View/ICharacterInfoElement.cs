@@ -4,7 +4,7 @@ namespace Game.Runtime.Input.View
 {
     public interface ICharacterInfoElement : IElement
     {
-        ICharacterView CharacterView { get; }
+        IFriendlyCharacterView FriendlyCharacterView { get; }
         IButton CloseButton { get; }
     }
 }

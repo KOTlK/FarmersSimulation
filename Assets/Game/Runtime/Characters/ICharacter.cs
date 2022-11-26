@@ -1,12 +1,9 @@
-﻿using Game.Runtime.Behavior.Characters.Professions;
-using Game.Runtime.View;
-using Game.Runtime.View.Characters;
+﻿using Game.Runtime.View;
 
 namespace Game.Runtime.Characters
 {
-    public interface ICharacter : IMovement, IVisualization<ICharacterView>, ISceneObject, IBehavior
+    public interface ICharacter : IMovement, ISceneObject
     {
-        Party Party { get; }
-        Profession Profession { get; }
+        
     }
 }

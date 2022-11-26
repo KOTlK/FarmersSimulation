@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Runtime.View.Characters
 {
-    public class CharacterView : MonoBehaviour, ICharacterView
+    public class FriendlyCharacterView : MonoBehaviour, IFriendlyCharacterView
     {
         [SerializeField] private TMP_Text _name, _age, _profession;
         [SerializeField] private TreeVisualization _behavior;
