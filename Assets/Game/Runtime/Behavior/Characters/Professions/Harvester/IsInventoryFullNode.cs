@@ -1,5 +1,5 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Characters.Professions.Harvester;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {

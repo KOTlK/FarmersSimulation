@@ -7,7 +7,7 @@ using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Behavior.Session;
 using Game.Runtime.Behavior.Session.View;
 using Game.Runtime.Characters;
-using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Characters.Professions.Harvester;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input.Characters;

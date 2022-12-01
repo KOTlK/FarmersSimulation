@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6635331274876017335}
   - component: {fileID: 6635331274876017332}
   - component: {fileID: 6635331274876017333}
-  - component: {fileID: 6635331274876017338}
+  - component: {fileID: 3921210184596801299}
   - component: {fileID: 6413549502830099050}
   - component: {fileID: 4465388232270128306}
   m_Layer: 0
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6635331274876017338
+--- !u!114 &3921210184596801299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,13 +118,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6635331274876017339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b299a5bea9d4e1c91f6e3f2eec19f88, type: 3}
+  m_Script: {fileID: 11500000, guid: a38ed208fcb34d179b825c1034ec214e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 5
   _name: Bob
   _age: 18
-  _speed: 5
-  _party: 0
+  _profession: 1
 --- !u!114 &6413549502830099050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982e53292e5849dbb0dbc7dca98b15ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 6635331274876017338}
+  _target: {fileID: 3921210184596801299}
 --- !u!61 &4465388232270128306
 BoxCollider2D:
   m_ObjectHideFlags: 0

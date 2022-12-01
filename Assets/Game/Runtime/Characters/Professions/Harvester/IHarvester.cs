@@ -1,9 +1,9 @@
 ﻿using Game.Runtime.Environment.Crops;
 using Game.Runtime.Resources;
 
-namespace Game.Runtime.Characters.Professions.Farmer
+namespace Game.Runtime.Characters.Professions.Harvester
 {
-    public interface IHarvester : IFriendlyCharacter
+    public interface IHarvester : IFriendlyCharacter, IWorker
     {
         bool InventoryFull { get; }
         bool HasResourceCollected { get; }

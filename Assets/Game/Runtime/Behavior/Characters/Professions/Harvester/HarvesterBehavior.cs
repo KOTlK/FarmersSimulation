@@ -1,6 +1,6 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Behavior.Characters.Professions.Harvester;
-using Game.Runtime.Characters.Professions.Farmer;
+using Game.Runtime.Characters.Professions.Harvester;
 using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Resources;

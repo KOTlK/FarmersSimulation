@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Runtime.Market;
 using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Resources
@@ -16,6 +17,8 @@ namespace Game.Runtime.Resources
         {
             _maxCapacity = maxCapacity;
         }
+
+        public int Count() => _count;
 
         public int Count(Resource resource)
         {
@@ -33,6 +36,17 @@ namespace Game.Runtime.Resources
         }
 
         public bool EnoughSpace(int amount) => _count + amount <= _maxCapacity;
+        public int CalculateCost(IMarket market)
+        {
+            var totalCost = 0;
+
+            foreach (var (resource, amount) in _resources)
+            {
+                totalCost += market.Price(resource) * amount;
+            }
+
+            return totalCost;
+        }
 
         public void Put(Resource resource, int amount = 1)
         {

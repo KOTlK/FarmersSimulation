@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Runtime.Market;
 using Game.Runtime.View.Storage;
 using UnityEngine;
 
@@ -10,10 +11,14 @@ namespace Game.Runtime.Resources
 
         public void Visualize(IResourceStorageView view) => _storage.Visualize(view);
 
+        public int Count() => _storage.Count();
+
         public int Count(Resource resource) => _storage.Count(resource);
         public int Count(IEnumerable<Resource> resource) => _storage.Count(resource);
 
         public bool EnoughSpace(int amount) => _storage.EnoughSpace(amount);
+        public int CalculateCost(IMarket market) => _storage.CalculateCost(market);
+
         public void Put(Resource resource, int amount = 1)
         {
             _storage.Put(resource, amount);
