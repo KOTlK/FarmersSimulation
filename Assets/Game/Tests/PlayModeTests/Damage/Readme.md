@@ -1,1 +1,0 @@
-﻿Normal PlayMode tests doesn't work normally, so I use this instead.

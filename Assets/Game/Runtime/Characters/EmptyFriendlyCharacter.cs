@@ -24,5 +24,6 @@ namespace Game.Runtime.Characters
         public Party Party => Party.Friend;
         public Profession Profession => Profession.Civilian;
         public Vector2 Direction { get; set; }
+        public Vector3 Rotation { get; set; }
     }
 }

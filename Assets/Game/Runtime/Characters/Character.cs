@@ -1,8 +1,4 @@
 ﻿using System;
-using BananaParty.BehaviorTree;
-using Game.Runtime.Behavior.Characters.Professions;
-using Game.Runtime.Random;
-using Game.Runtime.View.Characters;
 using UnityEngine;
 
 namespace Game.Runtime.Characters
@@ -19,7 +15,7 @@ namespace Game.Runtime.Characters
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             if (Direction != Vector2.zero)
                 Move(Direction);
@@ -36,6 +32,5 @@ namespace Game.Runtime.Characters
             var deltaMovement = direction * _speed * Time.deltaTime;
             _rigidbody.MovePosition(_rigidbody.position + deltaMovement);
         }
-
     }
 }

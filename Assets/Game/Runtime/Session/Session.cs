@@ -37,7 +37,6 @@ namespace Game.Runtime.Session
                     Profession.Civilian => new CivilianBehavior(character),
                     Profession.Farmer => new HarvesterBehavior<IPlant>((IHarvester)character, sceneData.Plants, sceneData.Storage),
                     Profession.Miner => new HarvesterBehavior<IMine>((IHarvester)character, sceneData.Mines, sceneData.Storage),
-                    Profession.Warrior => throw new NotImplementedException(),
                     _ => throw new NotImplementedException()
                 };
 

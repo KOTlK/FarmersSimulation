@@ -7,10 +7,10 @@ namespace Game.Runtime.Behavior.Characters.Professions
 {
     public class MoveTowardsNode : BehaviorNode
     {
-        private readonly IFriendlyCharacter _friendlyCharacter;
+        private readonly ICharacter _friendlyCharacter;
         private readonly ISceneObject _target;
 
-        public MoveTowardsNode(IFriendlyCharacter friendlyCharacter, ISceneObject target)
+        public MoveTowardsNode(ICharacter friendlyCharacter, ISceneObject target)
         {
             _friendlyCharacter = friendlyCharacter;
             _target = target;

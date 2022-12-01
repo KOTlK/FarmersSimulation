@@ -3,7 +3,6 @@
     public enum Profession
     {
         Miner,
-        Warrior,
         Farmer,
         Civilian
     }
