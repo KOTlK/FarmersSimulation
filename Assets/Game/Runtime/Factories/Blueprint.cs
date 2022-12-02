@@ -11,6 +11,16 @@ namespace Game.Game.Runtime.Factories
         [SerializeField] private ResourceStack[] _income;
         [SerializeField] private ResourceStack[] _outcome;
 
+        public Blueprint()
+        {
+        }
+
+        public Blueprint(ResourceStack[] income, ResourceStack[] outcome)
+        {
+            _income = income;
+            _outcome = outcome;
+        }
+
         public bool CanBeCrafted(IResourcesStorage storage)
         {
             return _income.All(income => storage.Count(income.Resource) >= income.Amount);
@@ -34,6 +44,15 @@ namespace Game.Game.Runtime.Factories
         [Serializable]
         public class ResourceStack
         {
+            public ResourceStack()
+            {
+            }
+            public ResourceStack(Resource resource, int amount)
+            {
+                Resource = resource;
+                Amount = amount;
+            }
+            
             [field: SerializeField] public Resource Resource { get; private set; }
             [field: SerializeField] public int Amount { get; private set; }
         }

@@ -1,8 +1,9 @@
-﻿using Game.Runtime.View;
+﻿using Game.Runtime.Resources;
+using Game.Runtime.View;
 
 namespace Game.Game.Runtime.Factories
 {
-    public interface IResourceFactory<out T> : IFactory<T>, ISceneObject
+    public interface IResourceFactory : IFactory<IResourcePack>, ISceneObject
     {
     }
 }

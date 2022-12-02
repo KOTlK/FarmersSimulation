@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Game.Game.Runtime.Factories
 {
-    public class ResourceFactory : MonoBehaviour, IResourceFactory<IResourcePack>
+    public abstract class ResourceFactory : MonoBehaviour, IResourceFactory
     {
-        [RequireInterface(typeof(IWorldStorage))] [SerializeField]
+        [RequireInterface(typeof(IWorldStorage)), SerializeField]
         private MonoBehaviour _incomeStorage, _outcomeStorage;
-
-        [SerializeField] private Blueprint _blueprint;
+        
         [SerializeField] private float _cooldown = 3f;
         [SerializeField] private bool _work = true;
+        [SerializeField] private Blueprint _blueprint;
 
         private IWorldStorage _income, _outcome;
 

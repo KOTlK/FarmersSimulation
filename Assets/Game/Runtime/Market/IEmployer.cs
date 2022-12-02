@@ -1,7 +1,11 @@
-﻿namespace Game.Runtime.Market
+﻿using Game.Runtime.Characters.Professions;
+
+namespace Game.Runtime.Market
 {
     public interface IEmployer
     {
-        float Percent { get; }
+        void PaySalary();
+        void AddEmployee(IWorker worker);
+        void RemoveEmployee(IWorker worker);
     }
 }

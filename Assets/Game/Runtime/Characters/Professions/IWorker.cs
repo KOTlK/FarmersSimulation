@@ -4,6 +4,7 @@ namespace Game.Runtime.Characters.Professions
 {
     public interface IWorker
     {
-        float Salary(IMarket market, IEmployer employer);
+        int CalculateSalary(IMarket market);
+        void PaySalary(int salary);
     }
 }
