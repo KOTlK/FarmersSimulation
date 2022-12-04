@@ -17,7 +17,7 @@ namespace Game.Runtime.View.World.Bezier
 
         private void SetTargetPosition(float t)
         {
-            _target.position = _curve.Lerp(t);
+            _target.position = _curve.Evaluate(t);
         }
     }
 }

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ec75f923e04edda459ea2db07bbfee75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d62cd73fbea2c8648b6f8e5b436b1b14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetResource: 0
   _growsTime: 5
-  _grownSprite: {fileID: 21300000, guid: f30c7d39dce913648a486285a1095dab, type: 3}
-  _undergrownSprite: {fileID: 21300000, guid: ec75f923e04edda459ea2db07bbfee75, type: 3}
+  _grownSprite: {fileID: 21300000, guid: f0c315a6dde746f46a557e6659fa3a45, type: 3}
+  _undergrownSprite: {fileID: 21300000, guid: d62cd73fbea2c8648b6f8e5b436b1b14, type: 3}
   _particles: {fileID: 5269358977139356324}
 --- !u!1 &5269358977139356325
 GameObject:
