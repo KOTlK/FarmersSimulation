@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Runtime.View.World.Bezier;
+﻿using Game.Runtime.View.World.Bezier;
 using UnityEngine;
 
 namespace Game.Runtime.View.World.Smoke

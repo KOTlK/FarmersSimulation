@@ -8,6 +8,7 @@ using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input;
 using Game.Runtime.Input.View;
+using Game.Runtime.Market.Employers;
 using Game.Runtime.Rendering;
 using Game.Runtime.Resources;
 using Game.Runtime.Session;
@@ -22,6 +23,7 @@ namespace Game.Runtime.Application
         [SerializeField] private TreeVisualization _debugGraph;
         [SerializeField] private WorldStorage _storage;
         [SerializeField] private MineStack _mines;
+        [SerializeField] private Factory[] _employers;
         [SerializeField] private TreeVisualization _debugSession;
         [SerializeField] private UIRoot _uiRoot = null;
         [SerializeField] private bool _visualizeBehaviors = false;
@@ -41,6 +43,7 @@ namespace Game.Runtime.Application
 
             var sceneData = new SceneData
             {
+                Employers = _employers,
                 Characters = characters,
                 CharacterInputs = new ClickQueue<IFriendlyCharacter>(inputs.ToArray()),
                 Names = _names,

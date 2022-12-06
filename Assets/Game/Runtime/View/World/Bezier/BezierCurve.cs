@@ -23,7 +23,7 @@ namespace Game.Runtime.View.World.Bezier
         }
 
         /// <summary>
-        /// Randomize point0 and point1 positions on horizontal axis. In this case point1 will be left and point1 - right
+        /// Randomize point0 and point1 positions on horizontal axis. In this case point1 will be left and point2 - right
         /// </summary>
         public void RandomizeHorizontal()
         {

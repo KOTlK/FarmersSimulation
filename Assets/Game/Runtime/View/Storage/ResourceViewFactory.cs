@@ -6,7 +6,15 @@ namespace Game.Runtime.View.Storage
 {
     public class ResourceViewFactory : MonoBehaviour
     {
-        [SerializeField] private ResourceView _wheatPrefab, _ironPrefab, _copperPrefab, _silverPrefab, _goldPrefab;
+        [SerializeField] private ResourceView _wheatPrefab,
+            _ironPrefab,
+            _copperPrefab,
+            _silverPrefab,
+            _goldPrefab,
+            _breadPrefab,
+            _ironSwordPrefab,
+            _copperSwordPrefab,
+            _moneyPrefab;
         
         public ResourceView Create(Resource item)
         {
@@ -17,6 +25,10 @@ namespace Game.Runtime.View.Storage
                 Resource.Iron => Instantiate(_ironPrefab),
                 Resource.Silver => Instantiate(_silverPrefab),
                 Resource.Gold => Instantiate(_goldPrefab),
+                Resource.Bread => Instantiate(_breadPrefab),
+                Resource.IronSword => Instantiate(_ironSwordPrefab),
+                Resource.CopperSword => Instantiate(_copperSwordPrefab),
+                Resource.Money => Instantiate(_moneyPrefab),
                 _ => throw new ArgumentOutOfRangeException(nameof(item), item, null)
             };
         }

@@ -9,7 +9,7 @@ namespace Game.Runtime.Market.Employers
         private readonly IWallet _budget = new Wallet(1000000);
         private readonly List<IWorker> _employees = new();
         private readonly IMarket _market = new Market();
-
+        
         public void PaySalary()
         {
             foreach (var employee in _employees)

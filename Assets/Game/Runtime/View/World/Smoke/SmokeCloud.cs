@@ -8,6 +8,7 @@ namespace Game.Runtime.View.World.Smoke
         [SerializeField, Min(1)] private int _partsAmount;
         [SerializeField, Min(0)] private float _minRadius = 0.5f;
         [SerializeField, Min(0)] private float _maxRadius = 5f;
+        [SerializeField] private int _orderInLayer = 1;
 
         private SmokePart[] _parts;
 
@@ -18,6 +19,7 @@ namespace Game.Runtime.View.World.Smoke
             for (var i = 0; i < _partsAmount; i++)
             {
                 _parts[i] = Instantiate(_partPrefab, transform);
+                _parts[i].GetComponent<Renderer>().sortingOrder = _orderInLayer;
             }
             Regenerate();
         }

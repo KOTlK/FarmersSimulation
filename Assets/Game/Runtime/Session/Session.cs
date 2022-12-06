@@ -1,11 +1,14 @@
 ﻿using System;
 using BananaParty.BehaviorTree;
+using Game.Game.Runtime.DateTime;
 using Game.Runtime.Application;
 using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions;
 using Game.Runtime.Behavior.Characters.Professions.Harvester;
+using Game.Runtime.Behavior.Factories;
 using Game.Runtime.Behavior.Session;
 using Game.Runtime.Behavior.Session.View;
+using Game.Runtime.Behavior.Time;
 using Game.Runtime.Characters;
 using Game.Runtime.Characters.Professions.Harvester;
 using Game.Runtime.Environment.Crops;
@@ -15,7 +18,9 @@ using Game.Runtime.Input.View;
 using Game.Runtime.Random;
 using Game.Runtime.Resources;
 using Game.Runtime.View.Characters;
+using Game.Runtime.View.DateTime;
 using Game.Runtime.View.Storage;
+using DateTime = Game.Game.Runtime.DateTime.DateTime;
 
 namespace Game.Runtime.Session
 {
@@ -29,6 +34,7 @@ namespace Game.Runtime.Session
             var selectedCharacter = new FriendlyCharacterSelector();
             var randomName = new RandomName(sceneData.Names.text);
             var randomAge = new RandomAge(18, 70);
+            IDateTime dateTime;
 
             foreach (var character in sceneData.Characters)
             {
@@ -47,6 +53,23 @@ namespace Game.Runtime.Session
             {
                 new ExecuteBehaviorsNode(sceneData.Characters),
 
+                new SequenceNode(new IBehaviorNode[]
+                {
+                    new TickNode(dateTime = new DateTime(
+                        new Date(1, 1, 2022), 
+                        new Time(0, 8, 10))
+                    ),
+                    new RenderNode<IDateTime, IDateView>(dateTime, ui.Date),
+                    new RenderNode<IDateTime, ITimeView>(dateTime, ui.Time),
+                    new WaitNode(100),
+                    new SequenceNode(new IBehaviorNode[]
+                    {
+                        new CompareDayNode(dateTime, 1),
+                        new CompareTimeNode(dateTime, 8, 0),
+                        new PayMonthlySalaryNode(sceneData.Employers)
+                    })
+                }, false, "Time").Repeat(),
+                
                 new ParallelSelectorNode(new IBehaviorNode[]
                 {
                     new SelectorNode(new IBehaviorNode[]
@@ -89,7 +112,7 @@ namespace Game.Runtime.Session
                             new DeactivateElementNode(ui.StorageElement)
                         })
                     })
-                }, "UI ")
+                }, "UI ").Repeat()
                 
             }).Repeat();
             

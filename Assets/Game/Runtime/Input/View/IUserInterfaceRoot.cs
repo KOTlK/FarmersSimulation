@@ -1,4 +1,5 @@
-﻿using Game.Runtime.View.Storage;
+﻿using Game.Runtime.View.DateTime;
+using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Input.View
 {
@@ -6,5 +7,7 @@ namespace Game.Runtime.Input.View
     {
         ICharacterInfoElement CharacterInfoElement { get; }
         ResourceStorageView StorageElement { get; }
+        ITimeView Time { get; }
+        IDateView Date { get; }
     }
 }
