@@ -1,5 +1,5 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Characters.Professions.Harvester;
+using Game.Runtime.Characters;
 using Game.Runtime.Resources;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
@@ -7,9 +7,9 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
     public class EmptyPocketsNode : BehaviorNode
     {
         private readonly IWorldStorage _storage;
-        private readonly IHarvester _farmer;
+        private readonly ICharacter _farmer;
 
-        public EmptyPocketsNode(IWorldStorage storage, IHarvester farmer)
+        public EmptyPocketsNode(IWorldStorage storage, ICharacter farmer)
         {
             _storage = storage;
             _farmer = farmer;

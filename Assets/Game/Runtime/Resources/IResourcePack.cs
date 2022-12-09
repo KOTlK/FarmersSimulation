@@ -2,6 +2,6 @@
 {
     public interface IResourcePack
     {
-        void Transfer(IResourcesStorage storage);
+        void Transfer(IResourceStorage storage);
     }
 }

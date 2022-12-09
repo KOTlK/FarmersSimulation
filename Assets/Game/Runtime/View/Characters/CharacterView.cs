@@ -1,13 +1,15 @@
 ﻿using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions;
 using Game.Runtime.Characters;
+using Game.Runtime.View.Wallet;
 using TMPro;
 using UnityEngine;
 
 namespace Game.Runtime.View.Characters
 {
-    public class FriendlyCharacterView : MonoBehaviour, IFriendlyCharacterView
+    public class CharacterView : MonoBehaviour, ICharacterView
     {
+        [SerializeField] private WalletView _wallet;
         [SerializeField] private TMP_Text _name, _age, _profession;
         [SerializeField] private TreeVisualization _behavior;
         
@@ -31,5 +33,7 @@ namespace Game.Runtime.View.Characters
             behavior.Visualize(_behavior);
             _behavior.Visualize();
         }
+
+        public void DisplayMoney(int amount) => _wallet.DisplayMoney(amount);
     }
 }

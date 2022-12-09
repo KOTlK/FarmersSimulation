@@ -10,7 +10,6 @@ using Game.Runtime.Behavior.Session;
 using Game.Runtime.Behavior.Session.View;
 using Game.Runtime.Behavior.Time;
 using Game.Runtime.Characters;
-using Game.Runtime.Characters.Professions.Harvester;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input.Characters;
@@ -31,7 +30,7 @@ namespace Game.Runtime.Session
         public Session(IUserInterfaceRoot ui, SceneData sceneData)
         {
             UI = ui;
-            var selectedCharacter = new FriendlyCharacterSelector();
+            var selectedCharacter = new CharacterSelector();
             var randomName = new RandomName(sceneData.Names.text);
             var randomAge = new RandomAge(18, 70);
             IDateTime dateTime;
@@ -41,8 +40,8 @@ namespace Game.Runtime.Session
                 IBehavior behavior = character.Profession switch
                 {
                     Profession.Civilian => new CivilianBehavior(character),
-                    Profession.Farmer => new HarvesterBehavior<IPlant>((IHarvester)character, sceneData.Plants, sceneData.Storage),
-                    Profession.Miner => new HarvesterBehavior<IMine>((IHarvester)character, sceneData.Mines, sceneData.Storage),
+                    Profession.Farmer => new HarvesterBehavior<IPlant>(character, sceneData.Plants, sceneData.Storage),
+                    Profession.Miner => new HarvesterBehavior<IMine>(character, sceneData.Mines, sceneData.Storage),
                     _ => throw new NotImplementedException()
                 };
 
@@ -56,7 +55,7 @@ namespace Game.Runtime.Session
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new TickNode(dateTime = new DateTime(
-                        new Date(1, 1, 2022), 
+                        new Date(12, 1, 2022), 
                         new Time(0, 8, 10))
                     ),
                     new RenderNode<IDateTime, IDateView>(dateTime, ui.Date),
@@ -86,7 +85,7 @@ namespace Game.Runtime.Session
                             new ParallelSequenceNode(new IBehaviorNode[]
                             {
                                 new WaitButtonClickNode(ui.CharacterInfoElement.CloseButton).Invert(),
-                                new RenderNode<IFriendlyCharacter, IFriendlyCharacterView>(selectedCharacter, ui.CharacterInfoElement.FriendlyCharacterView),
+                                new RenderNode<ICharacter, ICharacterView>(selectedCharacter, ui.CharacterInfoElement.CharacterView),
                                 new WaitCharacterClickNode(selectedCharacter, sceneData.CharacterInputs)
                             }).RepeatUntilFailure().Invert(),
                             new DeactivateElementNode(ui.CharacterInfoElement)

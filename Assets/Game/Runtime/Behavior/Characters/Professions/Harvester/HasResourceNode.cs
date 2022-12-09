@@ -1,13 +1,13 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Characters.Professions.Harvester;
+using Game.Runtime.Characters;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class HasResourceNode : BehaviorNode
     {
-        private readonly IHarvester _harvester;
+        private readonly ICharacter _harvester;
 
-        public HasResourceNode(IHarvester harvester)
+        public HasResourceNode(ICharacter harvester)
         {
             _harvester = harvester;
         }

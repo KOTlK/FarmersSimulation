@@ -1,13 +1,13 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Characters.Professions.Harvester;
+using Game.Runtime.Characters;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class IsInventoryFullNode : BehaviorNode
     {
-        private readonly IHarvester _harvester;
+        private readonly ICharacter _harvester;
 
-        public IsInventoryFullNode(IHarvester harvester)
+        public IsInventoryFullNode(ICharacter harvester)
         {
             _harvester = harvester;
         }

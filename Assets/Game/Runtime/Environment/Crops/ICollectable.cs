@@ -5,6 +5,6 @@ namespace Game.Runtime.Environment.Crops
     public interface ICollectable
     {
         bool ReadyForGather { get; }
-        void PickUp(IResourcesStorage storage);
+        void PickUp(IResourceStorage storage);
     }
 }

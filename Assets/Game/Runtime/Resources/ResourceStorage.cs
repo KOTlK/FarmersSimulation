@@ -6,7 +6,7 @@ using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Resources
 {
-    public class ResourceStorage : IResourcesStorage
+    public class ResourceStorage : IResourceStorage
     {
         private readonly Dictionary<Resource, int> _resources = new();
 

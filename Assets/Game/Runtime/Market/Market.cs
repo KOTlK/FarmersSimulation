@@ -8,6 +8,7 @@ namespace Game.Runtime.Market
         private readonly Dictionary<Resource, int> _prices = new()
         {
             {Resource.Wheat, 10},
+            {Resource.Bread, 15},
             {Resource.Copper, 15},
             {Resource.Iron, 25},
             {Resource.Silver, 35},

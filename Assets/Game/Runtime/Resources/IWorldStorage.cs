@@ -2,7 +2,7 @@
 
 namespace Game.Runtime.Resources
 {
-    public interface IWorldStorage : IResourcesStorage, ISceneObject
+    public interface IWorldStorage : IResourceStorage, ISceneObject
     {
         
     }

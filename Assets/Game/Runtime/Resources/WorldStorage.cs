@@ -7,7 +7,7 @@ namespace Game.Runtime.Resources
 {
     public class WorldStorage : MonoBehaviour, IWorldStorage
     {
-        private readonly IResourcesStorage _storage = new ResourceStorage(int.MaxValue);
+        private readonly IResourceStorage _storage = new ResourceStorage(int.MaxValue);
 
         public void Visualize(IResourceStorageView view) => _storage.Visualize(view);
 

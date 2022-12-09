@@ -1,6 +1,6 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Behavior.Characters.Professions.Harvester;
-using Game.Runtime.Characters.Professions.Harvester;
+using Game.Runtime.Characters;
 using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Resources;
@@ -13,7 +13,7 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
     {
         private readonly IBehaviorNode _behavior;
 
-        public HarvesterBehavior(IHarvester harvester, IResourceStack<TResource> stack, IWorldStorage storage)
+        public HarvesterBehavior(ICharacter harvester, IResourceStack<TResource> stack, IWorldStorage storage)
         {
             var selector = new ResourceSelector<TResource>();
 

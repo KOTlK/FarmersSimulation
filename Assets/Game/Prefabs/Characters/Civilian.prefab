@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7499839789513574214}
   - component: {fileID: 7499839789513574209}
   - component: {fileID: 7499839789513574208}
-  - component: {fileID: 7499839789513574210}
+  - component: {fileID: 5395094325404092563}
   - component: {fileID: 2625837177597697664}
   m_Layer: 0
   m_Name: Civilian
@@ -113,7 +113,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7499839789513574210
+--- !u!114 &5395094325404092563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,12 +122,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7499839789513578685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5bb41dad3d44ffb8b64dc0316e3ca08, type: 3}
+  m_Script: {fileID: 11500000, guid: fcec3f0614a743bfa43493984ec6b36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
   _name: Bob
   _age: 18
+  _profession: 2
 --- !u!114 &2625837177597697664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,4 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982e53292e5849dbb0dbc7dca98b15ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 7499839789513574210}
+  _target: {fileID: 5395094325404092563}

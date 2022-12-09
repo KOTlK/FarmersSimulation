@@ -4,7 +4,7 @@ using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.Resources
 {
-    public interface IResourcesStorage : IReadonlyResourceStorage, IVisualization<IResourceStorageView>
+    public interface IResourceStorage : IReadonlyResourceStorage, IVisualization<IResourceStorageView>
     {
         void Put(Resource resource, int amount = 1);
         /// <summary>

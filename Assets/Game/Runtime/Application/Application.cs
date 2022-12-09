@@ -2,12 +2,12 @@
 using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Characters;
-using Game.Runtime.Characters.Professions;
 using Game.Runtime.Environment.Crops;
 using Game.Runtime.Environment.Crops.MonoBehaviours;
 using Game.Runtime.Environment.Mines;
 using Game.Runtime.Input;
 using Game.Runtime.Input.View;
+using Game.Runtime.Market;
 using Game.Runtime.Market.Employers;
 using Game.Runtime.Rendering;
 using Game.Runtime.Resources;
@@ -23,7 +23,8 @@ namespace Game.Runtime.Application
         [SerializeField] private TreeVisualization _debugGraph;
         [SerializeField] private WorldStorage _storage;
         [SerializeField] private MineStack _mines;
-        [SerializeField] private Factory[] _employers;
+        [SerializeField] private Factory[] _factories;
+        [SerializeField] private Employer[] _employers;
         [SerializeField] private TreeVisualization _debugSession;
         [SerializeField] private UIRoot _uiRoot = null;
         [SerializeField] private bool _visualizeBehaviors = false;
@@ -34,18 +35,19 @@ namespace Game.Runtime.Application
         private void Start()
         {
             var plants = FindObjectsOfType<Plant>();
-            var characters = FindObjectsOfType<FriendlyCharacter>();
-            var inputs = characters.Select(character => character.GetComponent<IClickInput<IFriendlyCharacter>>());
+            var characters = FindObjectsOfType<Character>();
+            var inputs = characters.Select(character => character.GetComponent<IClickInput<ICharacter>>());
             var storageInput = new IClickInput<IWorldStorage>[1]
             {
                 _storage.GetComponent<IClickInput<IWorldStorage>>()
             };
+            var combinedEmployers = _factories.Concat(_employers.Cast<IEmployer>());
 
             var sceneData = new SceneData
             {
-                Employers = _employers,
+                Employers = combinedEmployers,
                 Characters = characters,
-                CharacterInputs = new ClickQueue<IFriendlyCharacter>(inputs.ToArray()),
+                CharacterInputs = new ClickQueue<ICharacter>(inputs.ToArray()),
                 Names = _names,
                 Plants = new ResourceStack<IPlant>(plants),
                 Mines = _mines,

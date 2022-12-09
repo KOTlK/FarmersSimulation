@@ -21,12 +21,12 @@ namespace Game.Game.Runtime.Factories
             _outcome = outcome;
         }
 
-        public bool CanBeCrafted(IResourcesStorage storage)
+        public bool CanBeCrafted(IResourceStorage storage)
         {
             return _income.All(income => storage.Count(income.Resource) >= income.Amount);
         }
 
-        public IResourcePack Craft(IResourcesStorage incomeStorage)
+        public IResourcePack Craft(IResourceStorage incomeStorage)
         {
             if (CanBeCrafted(incomeStorage) == false)
                 throw new ArgumentException(nameof(incomeStorage));

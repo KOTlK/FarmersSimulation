@@ -11,7 +11,7 @@ namespace Game.Runtime.Resources
             _resources = new List<(Resource, int)>(resource);
         }
 
-        public void Transfer(IResourcesStorage storage)
+        public void Transfer(IResourceStorage storage)
         {
             foreach (var (resource, amount) in _resources)
             {

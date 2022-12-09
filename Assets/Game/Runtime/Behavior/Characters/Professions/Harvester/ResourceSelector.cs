@@ -21,7 +21,7 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
         }
 
         public bool ReadyForGather => _origin.ReadyForGather;
-        public void PickUp(IResourcesStorage storage) => _origin.PickUp(storage);
+        public void PickUp(IResourceStorage storage) => _origin.PickUp(storage);
         public Vector2 Position => _origin.Position;
     }
 }

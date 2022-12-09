@@ -27,7 +27,7 @@ namespace Game.Runtime.Environment.Crops.MonoBehaviours
 
         public Vector2 Position => transform.position;
         
-        public void PickUp(IResourcesStorage storage)
+        public void PickUp(IResourceStorage storage)
         {
             if (ReadyForGather == false)
                 throw new Exception("Plant is not ready for gather");

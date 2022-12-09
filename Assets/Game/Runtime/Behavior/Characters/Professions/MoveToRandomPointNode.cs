@@ -8,25 +8,25 @@ namespace Game.Runtime.Behavior.Characters.Professions
     public class MoveToRandomPointNode : BehaviorNode
     {
         private readonly RandomPointFromCharacter _randomPoint;
-        private readonly IFriendlyCharacter _friendlyCharacter;
+        private readonly ICharacter _character;
 
-        public MoveToRandomPointNode(IFriendlyCharacter friendlyCharacter, float distance)
+        public MoveToRandomPointNode(ICharacter character, float distance)
         {
-            _randomPoint = new RandomPointFromCharacter(friendlyCharacter, distance);
-            _friendlyCharacter = friendlyCharacter;
+            _randomPoint = new RandomPointFromCharacter(character, distance);
+            _character = character;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            var direction = _randomPoint.Position - _friendlyCharacter.Position;
+            var direction = _randomPoint.Position - _character.Position;
 
             if (direction.sqrMagnitude <= 4f)
             {
-                _friendlyCharacter.Direction = Vector2.zero;
+                _character.Direction = Vector2.zero;
                 return BehaviorNodeStatus.Success;
             }
 
-            _friendlyCharacter.Direction = direction.normalized;
+            _character.Direction = direction.normalized;
             return BehaviorNodeStatus.Running;
         }
 

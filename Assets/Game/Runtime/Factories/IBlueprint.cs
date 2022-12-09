@@ -4,7 +4,7 @@ namespace Game.Game.Runtime.Factories
 {
     public interface IBlueprint
     {
-        bool CanBeCrafted(IResourcesStorage storage);
-        IResourcePack Craft(IResourcesStorage incomeStorage);
+        bool CanBeCrafted(IResourceStorage storage);
+        IResourcePack Craft(IResourceStorage incomeStorage);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Characters.Professions.Harvester;
+using Game.Runtime.Characters;
 using Game.Runtime.Environment.Crops;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
@@ -7,9 +7,9 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
     public class HarvestResourceNode : BehaviorNode
     {
         private readonly ICollectable _resource;
-        private readonly IHarvester _harvester;
+        private readonly ICharacter _harvester;
 
-        public HarvestResourceNode(ICollectable resource, IHarvester harvester)
+        public HarvestResourceNode(ICollectable resource, ICharacter harvester)
         {
             _resource = resource;
             _harvester = harvester;

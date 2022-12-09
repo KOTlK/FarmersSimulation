@@ -19,7 +19,7 @@ namespace Game.Runtime.Environment.Mines
             StartCoroutine(Waiting(_recoverTime));
         }
         
-        public void PickUp(IResourcesStorage storage)
+        public void PickUp(IResourceStorage storage)
         {
             if (storage.EnoughSpace(1) == false)
                 throw new Exception($"{nameof(storage)} does not have enough space");
