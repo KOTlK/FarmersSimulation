@@ -3,7 +3,7 @@ using System.Linq;
 using Game.Runtime.Resources;
 using UnityEngine;
 
-namespace Game.Game.Runtime.Factories
+namespace Game.Runtime.Factories
 {
     [Serializable]
     public class Blueprint : IBlueprint

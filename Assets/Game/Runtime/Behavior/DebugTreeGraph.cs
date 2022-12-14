@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using BananaParty.BehaviorTree;
+using Mathematics = System.Math;
 
 namespace Game.Runtime.Behavior
 {
@@ -90,7 +90,7 @@ namespace Game.Runtime.Behavior
                 }
             }
 
-            _indentation = _indentation.Substring(0, Math.Max(_indentation.Length - 2, 0));
+            _indentation = _indentation.Substring(0, Mathematics.Max(_indentation.Length - 2, 0));
         }
 
         public override string ToString()

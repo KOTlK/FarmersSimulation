@@ -1,4 +1,4 @@
-﻿namespace Game.Game.Runtime.DateTime
+﻿namespace Game.Runtime.DateTime
 {
     public interface ITick
     {

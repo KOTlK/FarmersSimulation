@@ -1,0 +1,46 @@
+﻿using System;
+
+namespace Game.Runtime.Math.Vectors
+{
+    public class Vector2Int : IEquatable<Vector2Int>
+    {
+        public int X { get; }
+        public int Y { get; }
+
+        public Vector2Int(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public override string ToString()
+        {
+            return $"Vector2Int({X}, {Y})";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals((Vector2Int) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
+        public bool Equals(Vector2Int other)
+        {
+            return GetHashCode() == other.GetHashCode();
+        }
+
+        public static bool operator ==(Vector2Int first, Vector2Int second)
+        {
+            return first.Equals(second);
+        }
+
+        public static bool operator !=(Vector2Int first, Vector2Int second)
+        {
+            return !first.Equals(second);
+        }
+    }
+}

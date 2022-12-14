@@ -1,5 +1,5 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Game.Runtime.DateTime;
+using Game.Runtime.DateTime;
 
 namespace Game.Runtime.Behavior.Time
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using BananaParty.BehaviorTree;
-using Game.Game.Runtime.DateTime;
+using Game.Runtime.DateTime;
 using Game.Runtime.Application;
 using Game.Runtime.Behavior;
 using Game.Runtime.Behavior.Characters.Professions;
@@ -19,7 +19,6 @@ using Game.Runtime.Resources;
 using Game.Runtime.View.Characters;
 using Game.Runtime.View.DateTime;
 using Game.Runtime.View.Storage;
-using DateTime = Game.Game.Runtime.DateTime.DateTime;
 
 namespace Game.Runtime.Session
 {
@@ -54,7 +53,7 @@ namespace Game.Runtime.Session
 
                 new SequenceNode(new IBehaviorNode[]
                 {
-                    new TickNode(dateTime = new DateTime(
+                    new TickNode(dateTime = new DateTime.DateTime(
                         new Date(12, 1, 2022), 
                         new Time(0, 8, 10))
                     ),

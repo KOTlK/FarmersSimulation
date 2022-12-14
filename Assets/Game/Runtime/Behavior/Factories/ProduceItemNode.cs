@@ -1,5 +1,5 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Game.Runtime.Factories;
+using Game.Runtime.Factories;
 
 namespace Game.Runtime.Behavior.Factories
 {

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Game.Game.Runtime.Factories;
 using Game.Runtime.Characters.Professions;
 
 namespace Game.Runtime.Market.Employers
 {
-    public class Factory : ResourceFactory, IEmployer
+    public class Factory : IEmployer
     {
         private readonly IWallet _budget = new Wallet(1000000);
         private readonly List<IWorker> _employees = new();

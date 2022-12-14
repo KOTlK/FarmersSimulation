@@ -1,6 +1,6 @@
 ﻿using Game.Runtime.Resources;
 
-namespace Game.Game.Runtime.Factories
+namespace Game.Runtime.Factories
 {
     public interface IBlueprint
     {

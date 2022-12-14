@@ -1,6 +1,6 @@
 ﻿using Game.Runtime.View.DateTime;
 
-namespace Game.Game.Runtime.DateTime
+namespace Game.Runtime.DateTime
 {
     public class Time : ITime
     {
