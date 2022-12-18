@@ -1,10 +1,10 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Environment;
-using Game.Runtime.View;
+using Game.Runtime.TileMap.Tiles;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
-    public class FindResourceNode<TResource> : BehaviorNode where TResource : ISceneObject
+    public class FindResourceNode<TResource> : BehaviorNode where TResource : ITransform
     {
         private readonly IResourceStack<TResource> _stack;
         private readonly IResourceSelector<TResource> _resourceSelector;

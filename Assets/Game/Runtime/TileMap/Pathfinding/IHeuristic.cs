@@ -4,6 +4,6 @@ namespace Game.Runtime.TileMap.Pathfinding
 {
     public interface IHeuristic
     {
-        float Value(Vector2Int first, Vector2Int second);
+        double Value(Vector2Int first, Vector2Int second);
     }
 }

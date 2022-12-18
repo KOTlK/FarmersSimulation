@@ -1,9 +1,6 @@
-﻿using Game.Runtime.View;
-using UnityEngine;
-
-namespace Game.Runtime.Environment.Crops
+﻿namespace Game.Runtime.Environment.Crops
 {
-    public interface IPlant : ICollectable, ISceneObject, IRecoverable<IPlant>
+    public interface IPlant<out T> : ICollectable, IRecoverable<T>
     {
     }
 }

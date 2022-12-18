@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Game.Runtime.Math.Vectors;
 
 namespace Game.Runtime.Characters
 {
     public interface IMovement
     {
-        Vector2 Direction { get; set; }
+        void Move(Vector2Int direction);
     }
 }

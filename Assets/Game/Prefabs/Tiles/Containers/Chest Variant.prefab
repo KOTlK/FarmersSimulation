@@ -20,6 +20,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ade01020328bdeb48864a04cb343982a, type: 3}
     - target: {fileID: 3090617030836046073, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090617030836046073, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -73,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875237055573314944, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: <TileType>k__BackingField
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}

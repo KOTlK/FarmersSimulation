@@ -102,14 +102,14 @@ PrefabInstance:
     - target: {fileID: 3090617030836046073, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a68954ef0a9fc8d49b3c8502b1668f1a, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3090617030836046073, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3090617030836046073, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7505568523641549346, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: m_RootOrder
@@ -161,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875237055573314944, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}
       propertyPath: <TileType>k__BackingField
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856e293eb0e23a7469f3fb21052f28c1, type: 3}

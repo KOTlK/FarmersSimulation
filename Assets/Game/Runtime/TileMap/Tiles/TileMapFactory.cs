@@ -10,7 +10,6 @@ namespace Game.Runtime.TileMap.Tiles
         private readonly ITileRule _tileRule;
         private readonly ICost _tileCosts;
 
-
         public TileMapFactory(Vector2Int size, ITileRule tileRule, ICost tileCosts)
         {
             _size = size;

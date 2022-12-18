@@ -1,5 +1,4 @@
-﻿using Game.Runtime.TileMap.Tiles;
-using Game.Runtime.Math.Vectors;
+﻿using Game.Runtime.Math.Vectors;
 using Game.Runtime.Rendering.Tiles;
 
 namespace Game.Runtime.TileMap.Tiles
@@ -11,7 +10,6 @@ namespace Game.Runtime.TileMap.Tiles
             Position = position;
         }
         protected abstract TileType Visualization { get; }
-        public abstract bool Walkable { get; }
         public Vector2Int Position { get; }
 
         public void Visualize(ITileMapRenderer view)

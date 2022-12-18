@@ -1,25 +1,20 @@
 ﻿using System.Collections.Generic;
-using Game.Runtime.TileMap.Tiles;
 using Game.Runtime.Market;
-using Game.Runtime.Math.Vectors;
 using Game.Runtime.Rendering.Tiles;
 using Game.Runtime.Resources;
 using Game.Runtime.View.Storage;
 
 namespace Game.Runtime.TileMap.Tiles.TileTypes
 {
-    public sealed class Chest : ITile, IResourceStorage
+    public sealed class Chest : Decorator, IChest
     {
         private readonly IResourceStorage _origin;
 
-        public Chest(Vector2Int position, IResourceStorage origin)
+        public Chest(ITile origin, IResourceStorage originStorage) : base(origin)
         {
-            _origin = origin;
-            Position = position;
+            _origin = originStorage;
         }
-
-        public Vector2Int Position { get; }
-        public bool Walkable { get; } = false;
+        
         public int Count() => _origin.Count();
 
         public int Count(Resource resource) => _origin.Count(resource);
@@ -41,9 +36,11 @@ namespace Game.Runtime.TileMap.Tiles.TileTypes
         public IResourcePack Take(IEnumerable<Resource> resources) => _origin.Take(resources);
 
         public IResourcePack Take() => _origin.Take();
-        public void Visualize(ITileMapRenderer view)
+        public override void Visualize(ITileMapRenderer view)
         {
-            view.SwitchTileInPosition(Position, TileType.Chest);
+            base.Visualize(view);
+            
+            view.DisplayDecorator(Position, TileType.Chest);
         }
     }
 }

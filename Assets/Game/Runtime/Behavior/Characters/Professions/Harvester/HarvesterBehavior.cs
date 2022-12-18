@@ -1,50 +1,56 @@
 ﻿using BananaParty.BehaviorTree;
-using Game.Runtime.Behavior.Characters.Professions.Harvester;
 using Game.Runtime.Characters;
 using Game.Runtime.Environment;
 using Game.Runtime.Environment.Crops;
-using Game.Runtime.Resources;
-using Game.Runtime.View;
+using Game.Runtime.TileMap;
+using Game.Runtime.TileMap.Tiles;
+using Game.Runtime.TileMap.Tiles.TileTypes;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
-    public class HarvesterBehavior<TResource> : IBehavior
-    where TResource : class, ISceneObject, ICollectable
+    public class HarvesterBehavior : BehaviorNode
     {
         private readonly IBehaviorNode _behavior;
 
-        public HarvesterBehavior(ICharacter harvester, IResourceStack<TResource> stack, IWorldStorage storage)
+        public HarvesterBehavior(ICharacter harvester, IResourceStack<CollectableResource> stack, IChest storage, ITileMap tileMap)
         {
-            var selector = new ResourceSelector<TResource>();
+            var selector = new ResourceSelector<CollectableResource>();
 
             _behavior = new SelectorNode(new IBehaviorNode[]
             {
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new IsInventoryFullNode(harvester),
-                    new FindResourceNode<TResource>(stack, selector),
-                    new MoveTowardsNode(harvester, selector),
-                    new WaitNode(1000),
+                    new FindResourceNode<CollectableResource>(stack, selector),
+                    new MoveTowardsNode(harvester, selector, tileMap),
+                    new WaitNode(2),
                     new HarvestResourceNode(selector, harvester)
                 }),
                 
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new HasResourceNode(harvester),
-                    new MoveTowardsNode(harvester, storage),
+                    new MoveTowardsNode(harvester, storage, tileMap),
                     new EmptyPocketsNode(storage, harvester)
                 }),
                 
                 new ParallelSequenceNode(new IBehaviorNode[]
                 {
-                    new MoveToRandomPointNode(harvester, 10f),
-                    new WaitNode(500)
+                    new MoveToRandomPointAround(harvester, tileMap),
+                    new WaitNode(3)
                 })
             }).Repeat();
         }
 
-        public void Visualize(ITreeGraph<IReadOnlyBehaviorNode> view) => _behavior.WriteToGraph(view);
+        public override BehaviorNodeStatus OnExecute(long time)
+        {
+            return _behavior.Execute(time);
+        }
 
-        public void Execute(long time) => _behavior.Execute(time);
+        public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
+        {
+            base.WriteToGraph(nodeGraph);
+            _behavior.WriteToGraph(nodeGraph);
+        }
     }
 }

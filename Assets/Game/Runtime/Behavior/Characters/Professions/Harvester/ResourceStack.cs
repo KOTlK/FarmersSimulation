@@ -6,7 +6,7 @@ using Game.Runtime.Environment.Crops;
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
 {
     public class ResourceStack<T> : IResourceStack<T>, IDisposable
-    where T : ICollectable, IRecoverable<T>
+    where T : IRecoverable<T>
     {
         private readonly IEnumerable<T> _resources;
         private readonly Stack<T> _stack;

@@ -1,33 +1,38 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
-using Game.Runtime.View;
-using UnityEngine;
+using Game.Runtime.Math.Vectors;
+using Game.Runtime.TileMap.Pathfinding;
+using Game.Runtime.TileMap.Tiles;
 
 namespace Game.Runtime.Behavior.Characters.Professions
 {
     public class MoveTowardsNode : BehaviorNode
     {
-        private readonly ICharacter _friendlyCharacter;
-        private readonly ISceneObject _target;
+        private readonly ICharacter _character;
+        private readonly ITransform _target;
+        private readonly IAlgorithm _pathfinding;
 
-        public MoveTowardsNode(ICharacter friendlyCharacter, ISceneObject target)
+        public MoveTowardsNode(ICharacter character, ITransform target, IAlgorithm pathfinding)
         {
-            _friendlyCharacter = friendlyCharacter;
+            _character = character;
             _target = target;
+            _pathfinding = pathfinding;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            var direction = _target.Position - _friendlyCharacter.Position;
-
-            if (direction.sqrMagnitude <= 2f)
+            var path = _pathfinding.FindPath(_character.Position, _target.Position);
+            path.Next();
+            
+            if (path.Next())
             {
-                _friendlyCharacter.Direction = Vector2.zero;
-                return BehaviorNodeStatus.Success;
+                var direction = new Subtract(path.Current, _character.Position);
+                _character.Move(direction);
+                return BehaviorNodeStatus.Running;
             }
 
-            _friendlyCharacter.Direction = direction.normalized;
-            return BehaviorNodeStatus.Running;
+            return BehaviorNodeStatus.Success;
         }
+
     }
 }

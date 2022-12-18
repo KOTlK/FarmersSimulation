@@ -12,10 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4bd27b214c4ba194188905b3f2a71a, type: 3}
   m_Name: TilesCosts
   m_EditorClassIdentifier: 
-  _grass: 1
-  _rock: 1
-  _soil: 2
-  _chest: 2
-  _empty: 1.7976931348623157e+308
-  _factory: 10
-  _wheat: 3
+  _costs:
+  - <Type>k__BackingField: 0
+    <Cost>k__BackingField: 1.7e+308
+  - <Type>k__BackingField: 1
+    <Cost>k__BackingField: 1
+  - <Type>k__BackingField: 2
+    <Cost>k__BackingField: 2
+  - <Type>k__BackingField: 3
+    <Cost>k__BackingField: 1
+  - <Type>k__BackingField: 4
+    <Cost>k__BackingField: 10
+  - <Type>k__BackingField: 13
+    <Cost>k__BackingField: 3
+  - <Type>k__BackingField: 14
+    <Cost>k__BackingField: 3
+  - <Type>k__BackingField: 15
+    <Cost>k__BackingField: 2
+  - <Type>k__BackingField: 16
+    <Cost>k__BackingField: 3
+  - <Type>k__BackingField: 17
+    <Cost>k__BackingField: 3
+  - <Type>k__BackingField: 18
+    <Cost>k__BackingField: 3
+  - <Type>k__BackingField: 19
+    <Cost>k__BackingField: 3

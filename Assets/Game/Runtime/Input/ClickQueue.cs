@@ -6,7 +6,7 @@ namespace Game.Runtime.Input
     {
         private readonly Queue<T> _clickedCharacters = new();
 
-        public ClickQueue(IClickInput<T>[] inputs)
+        public ClickQueue(IEnumerable<IClickInput<T>> inputs)
         {
             foreach (var input in inputs)
             {

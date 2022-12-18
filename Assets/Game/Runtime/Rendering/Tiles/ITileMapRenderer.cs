@@ -6,5 +6,6 @@ namespace Game.Runtime.Rendering.Tiles
     public interface ITileMapRenderer
     {
         void SwitchTileInPosition(Vector2Int position, TileType type);
+        void DisplayDecorator(Vector2Int position, TileType type);
     }
 }

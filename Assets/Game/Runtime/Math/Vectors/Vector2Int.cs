@@ -13,6 +13,17 @@ namespace Game.Runtime.Math.Vectors
             Y = y;
         }
 
+        public Vector2Int Normalized
+        {
+            get
+            {
+                var invertedLength = 1f / (float)System.Math.Sqrt(X * X + Y * Y);
+                var x = Convert.ToInt32(X * invertedLength);
+                var y = Convert.ToInt32(Y * invertedLength);
+                return new Vector2Int(x, y);
+            }
+        }
+
         public override string ToString()
         {
             return $"Vector2Int({X}, {Y})";

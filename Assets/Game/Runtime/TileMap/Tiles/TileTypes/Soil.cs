@@ -10,6 +10,5 @@ namespace Game.Runtime.TileMap.Tiles.TileTypes
         }
 
         protected override TileType Visualization { get; } = TileType.Soil;
-        public override bool Walkable { get; } = true;
     }
 }

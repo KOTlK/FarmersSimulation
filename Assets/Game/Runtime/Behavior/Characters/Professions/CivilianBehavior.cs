@@ -1,39 +1,39 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
+using Game.Runtime.TileMap;
 
 namespace Game.Runtime.Behavior.Characters.Professions
 {
-    public class CivilianBehavior : IBehavior
+    public class CivilianBehavior : BehaviorNode
     {
         private readonly IBehaviorNode _behavior;
 
-        private const long WalkDuration = 2000;
-        private const long WaitDuration = 2000;
+        private const long WaitDuration = 5;
 
-        public CivilianBehavior(IMovement origin)
+        public CivilianBehavior(ICharacter origin, ITileMap tileMap)
         {
             _behavior = new SequenceNode(
                 new IBehaviorNode[]
                 {
-                    new ParallelSelectorNode(new IBehaviorNode[]
+                    new SequenceNode(new IBehaviorNode[]
                         {
-                            new MoveToRandomDirectionNode(origin),
-                            new WaitNode(WalkDuration)
+                            new MoveToRandomPointAround(origin, tileMap),
+                            new WaitNode(WaitDuration)
                         }
                     ),
-                    new WaitNode(WaitDuration)
                 }
             ).Repeat();
         }
 
-        public void Execute(long time)
+        public override BehaviorNodeStatus OnExecute(long time)
         {
-            _behavior.Execute(time);
+            return _behavior.Execute(time);
         }
 
-        public void Visualize(ITreeGraph<IReadOnlyBehaviorNode> graph)
+        public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {
-            _behavior.WriteToGraph(graph);
+            base.WriteToGraph(nodeGraph);
+            _behavior.WriteToGraph(nodeGraph);
         }
     }
 }

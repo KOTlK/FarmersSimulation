@@ -15,7 +15,6 @@ namespace Game.Runtime.Application
         public IEnumerable<IEmployer> Employers { get; set; }
         public Character[] Characters { get; set; }
         public IClickQueue<ICharacter> CharacterInputs { get; set; }
-        public IResourceStack<IPlant> Plants { get; set; }
         public IResourceStack<IMine> Mines { get; set; }
         public IWorldStorage Storage { get; set; }
         public IClickQueue<IWorldStorage> StorageInputs { get; set; }

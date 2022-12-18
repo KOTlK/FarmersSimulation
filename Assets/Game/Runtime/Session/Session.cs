@@ -28,6 +28,7 @@ namespace Game.Runtime.Session
         
         public Session(IUserInterfaceRoot ui, SceneData sceneData)
         {
+            /*
             UI = ui;
             var selectedCharacter = new CharacterSelector();
             var randomName = new RandomName(sceneData.Names.text);
@@ -112,7 +113,7 @@ namespace Game.Runtime.Session
                     })
                 }, "UI ").Repeat()
                 
-            }).Repeat();
+            }).Repeat();*/
             
         }
 

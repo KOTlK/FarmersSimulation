@@ -1,10 +1,6 @@
 ﻿using System;
-using Game.Runtime.TileMap.Tiles;
-using Game.Runtime.Math.Vectors;
-using Game.Runtime.Rendering.Tiles;
 using Game.Runtime.TileMap.Tiles.TileTypes;
 using UnityEngine;
-using Random = System.Random;
 using Vector2Int = Game.Runtime.Math.Vectors.Vector2Int;
 
 namespace Game.Runtime.TileMap.Tiles
@@ -36,7 +32,7 @@ namespace Game.Runtime.TileMap.Tiles
             {
                 <= 0.3f => WheatOrSoil(position),
                 <= 0.6f => new Grass(position),
-                > 0.6f => new Rock(position),
+                > 0.6f => RockOrMine(position),
                 _ => throw new ArgumentOutOfRangeException(nameof(noise), noise, null)
             };
         }
@@ -47,9 +43,33 @@ namespace Game.Runtime.TileMap.Tiles
 
             return randomValue switch
                    {
-                       <= 20 => new Wheat(position),
+                       <= 20 => new Wheat(new Soil(position)),
                        >20 => new Soil(position)
                    };
+        }
+
+        private ITile RockOrMine(Vector2Int position)
+        {
+            var value = _random.Next(0, 100);
+
+            return value switch
+            {
+                <= 5 => RandomMine(position),
+                _ => new Rock(position)
+            };
+        }
+
+        private ITile RandomMine(Vector2Int position)
+        {
+            var random = _random.Next(0, 100);
+
+            return random switch
+            {
+                <= 5 => new GoldMine(new Rock(position)),
+                <= 8 => new SilverMine(new Rock(position)),
+                <= 30 => new IronMine(new Rock(position)),
+                _ => new CopperMine(new Rock(position))
+            };
         }
     }
 }
