@@ -37,7 +37,7 @@ namespace Game.Runtime.TileMap.Pathfinding
                     var currentPosition = new Vector2Int(x, y);
 
                     var neighbours = (from offset in _offsets 
-                                      select new Sum(currentPosition, offset) 
+                                      select currentPosition + offset 
                                       into neighbour 
                                       where neighbour.X >= 0 && neighbour.Y >= 0 
                                       where neighbour.X <= length - 1 
@@ -84,7 +84,7 @@ namespace Game.Runtime.TileMap.Pathfinding
         {
             foreach (var offset in _offsets)
             {
-                var neighbour = new Sum(position, offset);
+                var neighbour = position + offset;
 
                 if (_neighbours.ContainsKey(neighbour))
                 {
@@ -96,7 +96,7 @@ namespace Game.Runtime.TileMap.Pathfinding
         private IEnumerable<Vector2Int> CalculateNeighboursIn(Vector2Int position)
         {
             return _offsets
-                  .Select(offset => new Sum(position, offset))
+                  .Select(offset => position + offset)
                   .Where(nextPosition => _neighbours.ContainsKey(nextPosition))
                   .Cast<Vector2Int>().ToList();
         }

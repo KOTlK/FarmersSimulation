@@ -37,7 +37,5 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
         {
             _stack.Push(resource);
         }
-
-        
     }
 }

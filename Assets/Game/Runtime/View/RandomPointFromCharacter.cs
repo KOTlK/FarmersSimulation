@@ -8,13 +8,12 @@ namespace Game.Runtime.View
     {
         private readonly ICharacter _character;
         private readonly int _distance;
-        private readonly System.Random _random;
+        private readonly RandomDirection _randomDirection = new();
         
         public RandomPointFromCharacter(ICharacter character, int distance)
         {
             _character = character;
             _distance = distance;
-            _random = new System.Random();
             Next();
         }
 
@@ -22,9 +21,7 @@ namespace Game.Runtime.View
 
         private void Next()
         {
-            Position = new Sum(
-                _character.Position,
-                new Multiply(new RandomDirection(_random), _distance));
+            Position = _character.Position + _randomDirection.Next() * _distance;
         }
     }
 }

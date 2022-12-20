@@ -7,7 +7,7 @@ namespace Game.Runtime.TileMap.Tiles.TileTypes
     {
         public Wheat(ITile origin) : base(origin) { }
         protected override Resource Resource => Resource.Wheat;
-        protected override int Cooldown => 10;
+        protected override int Cooldown => 100;
         
         public override void Visualize(ITileMapRenderer view)
         {

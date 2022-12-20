@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Runtime.Characters;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ namespace Game.Runtime.Rendering.Characters
 {
     public class CharacterRenderer : MonoBehaviour, ICharacterRenderer
     {
+        [SerializeField] private Transform _parent;
         [SerializeField] private PrefabDictionary _prefabs;
 
         private readonly Dictionary<ICharacter, Character> _spawned = new();
@@ -24,7 +24,7 @@ namespace Game.Runtime.Rendering.Characters
             }
             else
             {
-                var view = Instantiate(_prefabs.Get(type));
+                var view = Instantiate(_prefabs.Get(type), _parent);
                 view.SetPosition(character.Position);
                 _spawned.Add(character, view);
             }

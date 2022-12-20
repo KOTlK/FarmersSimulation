@@ -22,7 +22,7 @@ namespace Game.Runtime.TileMap
         private readonly IGraph _graph;
         private readonly IAlgorithm _pathfinding;
         private readonly Dictionary<Type, List<ITile>> _tilesByType = new();
-        private readonly System.Random _random = new();
+        private readonly RandomDirection _random = new();
 
         public TileMap(ITile[,] tiles, ICost walkCosts)
         {
@@ -71,7 +71,7 @@ namespace Game.Runtime.TileMap
 
         public Vector2Int PointAround(Vector2Int position)
         {
-            var point = new Sum(position, new RandomDirection(_random));
+            var point = position + _random.Next();
             var x = point.X;
             var y = point.Y;
 

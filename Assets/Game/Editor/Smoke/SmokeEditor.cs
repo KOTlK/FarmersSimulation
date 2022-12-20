@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Game.Editor.Smoke
 {
     [CustomEditor(typeof(SmokeCloud))]
+    
     public class SmokeEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()

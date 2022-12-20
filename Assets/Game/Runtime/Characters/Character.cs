@@ -19,10 +19,10 @@ namespace Game.Runtime.Characters
         private readonly IResourceStorage _gatheredResources = new ResourceStorage(1000);
         private readonly IWallet _wallet = new Wallet();
         
-        public Character (IRandomGenerator<string> randomName, IRandomGenerator<float> randomAge, Vector2Int startPosition)
+        public Character (string name, float age, Vector2Int startPosition)
         {
-            _name = randomName.Next();
-            _age = randomAge.Next();
+            _name = name;
+            _age = age;
             Position = startPosition;
         }
         
@@ -73,7 +73,7 @@ namespace Game.Runtime.Characters
 
         public void Move(Vector2Int direction)
         {
-            Position = new Sum(direction, Position);
+            Position = direction + Position;
         }
     }
 }

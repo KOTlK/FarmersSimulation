@@ -10,20 +10,21 @@ namespace Game.Runtime.Rendering.Tiles
     public class TileMapRenderer : MonoBehaviour, ITileMapRenderer
     {
         [SerializeField] private TilesDictionary _dictionary;
-
+        
         private readonly Dictionary<Vector2Int, ITileView> _tiles = new();
         private readonly Dictionary<Vector2Int, ITileView> _decorators = new();
+        private TilesPool _pool;
 
         private void Awake()
         {
-            _dictionary.Init();
+            _pool = new TilesPool(_dictionary, transform);
         }
 
         public void SwitchTileInPosition(Vector2Int position, TileType type)
         {
             if (_tiles.ContainsKey(position) == false)
             {
-                var view = Instantiate(_dictionary.Get(type), transform);
+                var view = _pool.Get(type);
                 view.DisplayTile(position);
                 _tiles.Add(position, view);
             }
@@ -31,9 +32,9 @@ namespace Game.Runtime.Rendering.Tiles
             {
                 if (_tiles[position].TileType == type)
                     return;
-                
-                _tiles[position].Destroy();
-                _tiles[position] = Instantiate(_dictionary.Get(type), transform);
+
+                _pool.Release(_tiles[position]);
+                _tiles[position] = _pool.Get(type);
                 _tiles[position].DisplayTile(position);
             }
         }
@@ -42,7 +43,7 @@ namespace Game.Runtime.Rendering.Tiles
         {
             if (_decorators.ContainsKey(position) == false)
             {
-                var view = Instantiate(_dictionary.Get(type), transform);
+                var view = _pool.Get(type);
                 view.DisplayTile(position);
                 _decorators[position] = view;
             }
@@ -50,7 +51,7 @@ namespace Game.Runtime.Rendering.Tiles
             {
                 if (type == TileType.Empty)
                 {
-                    _decorators[position].Destroy();
+                    _pool.Release(_decorators[position]);
                     _decorators.Remove(position);
                     return;
                 }
@@ -58,10 +59,11 @@ namespace Game.Runtime.Rendering.Tiles
                 if (_decorators[position].TileType == type)
                     return;
                 
-                _decorators[position].Destroy();
-                _decorators[position] = Instantiate(_dictionary.Get(type), transform);
+                _pool.Release(_decorators[position]);
+                _decorators[position] = _pool.Get(type);
                 _decorators[position].DisplayTile(position);
             }
         }
+
     }
 }

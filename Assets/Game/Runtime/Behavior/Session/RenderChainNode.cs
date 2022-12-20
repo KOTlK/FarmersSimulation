@@ -7,18 +7,20 @@ namespace Game.Runtime.Behavior.Session
     public class RenderChainNode<TModel, TView> : BehaviorNode
     where TModel : IVisualization<TView>
     {
-        private readonly IEnumerable<RenderNode<TModel, TView>> _renders;
+        private readonly IEnumerable<TModel> _models;
+        private readonly TView _view;
 
-        public RenderChainNode(IEnumerable<RenderNode<TModel, TView>> renders)
+        public RenderChainNode(IEnumerable<TModel> models, TView view)
         {
-            _renders = renders;
+            _models = models;
+            _view = view;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            foreach (var render in _renders)
+            foreach (var model in _models)
             {
-                render.Execute(time);
+                model.Visualize(_view);
             }
 
             return BehaviorNodeStatus.Success;

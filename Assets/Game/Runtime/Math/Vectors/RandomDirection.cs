@@ -1,7 +1,14 @@
 ﻿namespace Game.Runtime.Math.Vectors
 {
-    public class RandomDirection : Vector2Int
+    public class RandomDirection
     {
-        public RandomDirection(System.Random random) : base(random.Next(-1, 1), random.Next(-1, 1)) { }
+        private readonly System.Random _random = new();
+
+        public RandomDirection() { }
+
+        public Vector2Int Next()
+        {
+            return new Vector2Int(_random.Next(-1, 1), _random.Next(-1, 1));
+        }
     }
 }

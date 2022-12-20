@@ -6,6 +6,5 @@ namespace Game.Runtime.Session
 {
     public interface ISession : IGameLoop, IVisualization<ITreeGraph<IReadOnlyBehaviorNode>>
     {
-        IUserInterfaceRoot UI { get; }
     }
 }

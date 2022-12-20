@@ -23,7 +23,7 @@ namespace Game.Runtime.TileMap.Pathfinding
 
         public void Visualize(ITileGraphView view)
         {
-            Vector2Int previous = new Zero();
+            var previous = Vector2Int.Zero;
             var zero = previous;
             
             foreach (var point in _points)

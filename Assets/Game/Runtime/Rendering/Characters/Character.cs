@@ -7,7 +7,7 @@ namespace Game.Runtime.Rendering.Characters
     {
         public void SetPosition(Vector2Int position)
         {
-            transform.position = new Vector3(position.X, position.Y);
+            transform.localPosition = new Vector3(position.X, position.Y);
         }
     }
 }

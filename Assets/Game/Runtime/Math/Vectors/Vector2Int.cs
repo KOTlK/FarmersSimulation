@@ -2,26 +2,43 @@
 
 namespace Game.Runtime.Math.Vectors
 {
-    public class Vector2Int : IEquatable<Vector2Int>
+    public readonly struct Vector2Int : IEquatable<Vector2Int>
     {
-        public int X { get; }
-        public int Y { get; }
-
         public Vector2Int(int x, int y)
         {
             X = x;
             Y = y;
         }
 
+        public static Vector2Int Zero = new(0, 0);
+        
+        public int X { get; }
+        public int Y { get; }
+
         public Vector2Int Normalized
         {
             get
             {
                 var invertedLength = 1f / (float)System.Math.Sqrt(X * X + Y * Y);
-                var x = Convert.ToInt32(X * invertedLength);
-                var y = Convert.ToInt32(Y * invertedLength);
+                var x = (int)(X * invertedLength);
+                var y = (int)(Y * invertedLength);
                 return new Vector2Int(x, y);
             }
+        }
+
+        public static Vector2Int operator +(Vector2Int first, Vector2Int second)
+        {
+            return new Vector2Int(first.X + second.X, first.Y + second.Y);
+        }
+
+        public static Vector2Int operator -(Vector2Int first, Vector2Int second)
+        {
+            return new Vector2Int(first.X - second.X, first.Y - second.Y);
+        }
+
+        public static Vector2Int operator *(Vector2Int vector, int multiplier)
+        {
+            return new Vector2Int(vector.X * multiplier, vector.Y * multiplier);
         }
 
         public override string ToString()

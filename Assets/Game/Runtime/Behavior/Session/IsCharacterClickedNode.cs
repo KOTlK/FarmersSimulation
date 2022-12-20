@@ -1,28 +1,35 @@
-﻿using BananaParty.BehaviorTree;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
-using Game.Runtime.Input;
 using Game.Runtime.Input.Characters;
+using Game.Runtime.Input.Click;
 
 namespace Game.Runtime.Behavior.Session
 {
     public class IsCharacterClickedNode : BehaviorNode
     {
-        private readonly IClickQueue<ICharacter> _characterQueue;
         private readonly ICharacterSelector _characterSelector;
+        private readonly IMouse _mouse;
+        private readonly IEnumerable<ICharacter> _spawnedCharacters;
 
-        public IsCharacterClickedNode(IClickQueue<ICharacter> characterQueue, ICharacterSelector characterSelector)
+        public IsCharacterClickedNode(IMouse mouse, IEnumerable<ICharacter> spawnedCharacters, ICharacterSelector characterSelector)
         {
-            _characterQueue = characterQueue;
+            _mouse = mouse;
             _characterSelector = characterSelector;
+            _spawnedCharacters = spawnedCharacters;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            if (_characterQueue.HasUnreadInput == false) return BehaviorNodeStatus.Failure;
+            if (_mouse.Clicked == false) return BehaviorNodeStatus.Failure;
             
-            
-            _characterSelector.Select(_characterQueue.GetInput());
-            _characterQueue.Clear();
+            var character = _spawnedCharacters.FirstOrDefault(character => character.Position == _mouse.Position);
+
+            if (character == null)
+                return BehaviorNodeStatus.Failure;
+
+            _characterSelector.Select(character);
             return BehaviorNodeStatus.Success;
 
         }

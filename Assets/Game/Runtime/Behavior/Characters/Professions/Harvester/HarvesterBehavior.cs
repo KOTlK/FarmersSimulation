@@ -1,9 +1,7 @@
 ﻿using BananaParty.BehaviorTree;
 using Game.Runtime.Characters;
 using Game.Runtime.Environment;
-using Game.Runtime.Environment.Crops;
 using Game.Runtime.TileMap;
-using Game.Runtime.TileMap.Tiles;
 using Game.Runtime.TileMap.Tiles.TileTypes;
 
 namespace Game.Runtime.Behavior.Characters.Professions.Harvester
@@ -15,6 +13,7 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
         public HarvesterBehavior(ICharacter harvester, IResourceStack<CollectableResource> stack, IChest storage, ITileMap tileMap)
         {
             var selector = new ResourceSelector<CollectableResource>();
+            var path = new PathVariable();
 
             _behavior = new SelectorNode(new IBehaviorNode[]
             {
@@ -22,7 +21,8 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
                 {
                     new IsInventoryFullNode(harvester),
                     new FindResourceNode<CollectableResource>(stack, selector),
-                    new MoveTowardsNode(harvester, selector, tileMap),
+                    new FindPathNode(path, tileMap, harvester, selector),
+                    new MoveTowardsNode(harvester, path),
                     new WaitNode(2),
                     new HarvestResourceNode(selector, harvester)
                 }),
@@ -30,7 +30,8 @@ namespace Game.Runtime.Behavior.Characters.Professions.Harvester
                 new SequenceNode(new IBehaviorNode[]
                 {
                     new HasResourceNode(harvester),
-                    new MoveTowardsNode(harvester, storage, tileMap),
+                    new FindPathNode(path, tileMap, harvester, storage),
+                    new MoveTowardsNode(harvester, path),
                     new EmptyPocketsNode(storage, harvester)
                 }),
                 

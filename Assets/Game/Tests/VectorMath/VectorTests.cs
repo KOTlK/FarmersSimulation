@@ -8,8 +8,8 @@ namespace Game.Tests.VectorMath
         [Test]
         public void VectorsWillBeEquals()
         {
-            var first = new Zero();
-            var second = new Zero();
+            var first = Vector2Int.Zero;
+            var second = Vector2Int.Zero;
 
             Assert.True(first == second);
 
@@ -25,7 +25,7 @@ namespace Game.Tests.VectorMath
             var first = new Vector2Int(10, 10);
             var second = new Vector2Int(10, 10);
 
-            var total = new Sum(first, second);
+            var total = first + second;
 
             Assert.True(total == new Vector2Int(20, 20));
         }
@@ -36,7 +36,7 @@ namespace Game.Tests.VectorMath
             var vector = new Vector2Int(10, 10);
             var multiplier = 2;
 
-            var total = new Multiply(vector, multiplier);
+            var total = vector * multiplier;
 
             Assert.True(total == new Vector2Int(20, 20));
         }
@@ -47,7 +47,7 @@ namespace Game.Tests.VectorMath
             var first = new Vector2Int(10, 10);
             var second = new Vector2Int(5, 5);
 
-            var total = new Subtract(first, second);
+            var total = first - second;
 
             Assert.True(total.Equals(second));
         }
