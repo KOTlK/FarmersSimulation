@@ -3,11 +3,11 @@ using BananaParty.BehaviorTree;
 
 namespace Game.Runtime.Behavior.Characters
 {
-    public class ExecuteBehaviorsNode : BehaviorNode
+    public class ExecuteAiBehaviorsNode : BehaviorNode
     {
         private readonly IEnumerable<IBehaviorNode> _nodes;
 
-        public ExecuteBehaviorsNode(IEnumerable<IBehaviorNode> nodes)
+        public ExecuteAiBehaviorsNode(IEnumerable<IBehaviorNode> nodes)
         {
             _nodes = nodes;
         }
