@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,15 +35,12 @@ namespace Game.Runtime.Input.View.PauseMenu
             get => gameObject.activeSelf;
             set
             {
-                if (gameObject.activeSelf != value)
-                {
-                    if (value == true)
-                        gameObject.SetActive(true);
-                    if(_coroutine != null) 
-                        StopCoroutine(_coroutine);
+                gameObject.SetActive(true);
                     
-                    StartCoroutine(Appearing(_fadeTime, value));
-                }
+                if(_coroutine != null) 
+                    StopCoroutine(_coroutine);
+                    
+                _coroutine = StartCoroutine(Appearing(_fadeTime, !value));
             }
         }
 
@@ -54,11 +52,11 @@ namespace Game.Runtime.Input.View.PauseMenu
             {
                 var delta = timeElapsed / time;
                 
-                var radius = revert == false
+                var radius = revert
                     ? Mathf.Lerp(_maxRadius, _minRadius, delta)
                     : Mathf.Lerp(_minRadius, _maxRadius, delta);
 
-                var alpha = revert == false
+                var alpha = revert
                     ? Mathf.Lerp(_maxImageAlpha, _minImageAlpha, delta)
                     : Mathf.Lerp(_minImageAlpha, _maxImageAlpha, delta);
 
@@ -70,8 +68,12 @@ namespace Game.Runtime.Input.View.PauseMenu
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
-            
-            gameObject.SetActive(revert);
+
+            if (revert)
+            {
+                gameObject.SetActive(false);
+            }
         }
+        
     }
 }
